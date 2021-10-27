@@ -2,12 +2,12 @@ package datastructure;
 
 public class AVLTreeNode<T> {
 
-	public T element;
+	private T element;
 	
-	public int height;
+	private int height;
 	
-	public AVLTreeNode<T> right;
-	public AVLTreeNode<T> left;
+	private AVLTreeNode<T> right;
+	private AVLTreeNode<T> left;
 
 	public AVLTreeNode() {
 		height = 1;
