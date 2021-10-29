@@ -9,11 +9,11 @@ public class Player {
 	// Datos estadisticos.
 	private float pointsPerGame;
 	private float reboundPerGame;
-	private float assistsPerGame;
-	private float robberiesPerGame;
-	private float blocksPerGame;
+	//private float assistsPerGame;
+	//private float robberiesPerGame;
+	//private float blocksPerGame;
 	
-	public Player(String n, String ls, String t, int a, float ppg, float rpg, float apg, float rbpg, float bpg) {
+	public Player(String n, String ls, String t, int a, float ppg, float rpg/*, float apg, float rbpg, float bpg*/) {
 		name = n;
 		lastName = ls;
 		team = t;
@@ -21,9 +21,9 @@ public class Player {
 		
 		setPointsPerGame(ppg);
 		setReboundPerGame(rpg);
-		setAssistsPerGame(apg);
-		setRobberiesPerGame(rbpg);
-		setBlocksPerGame(bpg);
+		//setAssistsPerGame(apg);
+		//setRobberiesPerGame(rbpg);
+		//setBlocksPerGame(bpg);
 	}
 
 	public String getName() {
@@ -57,7 +57,7 @@ public class Player {
 	public void setReboundPerGame(float reboundPerGame) {
 		this.reboundPerGame = reboundPerGame;
 	}
-
+	/*
 	public float getAssistsPerGame() {
 		return assistsPerGame;
 	}
@@ -81,7 +81,7 @@ public class Player {
 	public void setBlocksPerGame(float blocksPerGame) {
 		this.blocksPerGame = blocksPerGame;
 	}
-	
+	*/
 	public String toString() {
 		String str = "";
 		str += getTeam()+", ";
@@ -91,9 +91,10 @@ public class Player {
 		
 		str += getPointsPerGame()+" ";
 		str += getReboundPerGame()+" ";
-		str += getAssistsPerGame()+" ";
-		str += getRobberiesPerGame()+" ";
-		str += getBlocksPerGame();
+		//str += getAssistsPerGame()+" ";
+		//str += getRobberiesPerGame()+" ";
+		//str += getBlocksPerGame();
+		str += "\n";
 		return str;
 	}
 }
