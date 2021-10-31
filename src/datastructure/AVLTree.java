@@ -1,5 +1,8 @@
 package datastructure;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AVLTree <T extends Comparable<T>, K> implements IAVLTree<T, K>{
 
 	AVLTreeNode<T, K> root;
@@ -8,8 +11,8 @@ public class AVLTree <T extends Comparable<T>, K> implements IAVLTree<T, K>{
 		root = null;
 	}
 	
-	public AVLTree(T r) {
-		root = new AVLTreeNode<T, K>(r);
+	public AVLTree(T r, K k) {
+		root = new AVLTreeNode<T, K>(r, k);
 	}
 	//Revisa si el arbol se encuentra vacio.
 	@Override
@@ -76,24 +79,24 @@ public class AVLTree <T extends Comparable<T>, K> implements IAVLTree<T, K>{
 	}
 	//Insertar un nuevo nodo.
 	@Override
-	public AVLTreeNode<T, K> insert(T element) {
+	public AVLTreeNode<T, K> insert(T element, K key) {
 		if(root == null) {
-			root = new AVLTreeNode<>(element);
+			root = new AVLTreeNode<>(element, key);
 			return root;
-		}else return insert(element, root);
+		}else return insert(element, key, root);
 	}
 	
-	public AVLTreeNode<T, K> insert(T element, AVLTreeNode<T, K> node) {
+	public AVLTreeNode<T, K> insert(T element, K key, AVLTreeNode<T, K> node) {
 		if(node == null) {
-			return (new AVLTreeNode<>(element));
+			return (new AVLTreeNode<>(element, key));
 		}
 		if(element.compareTo(node.getData())>=0) {
-			node.setRight(insert(element, node.getRight())); 
+			node.setRight(insert(element, key, node.getRight())); 
 		}else {
-			node.setLeft(insert(element, node.getLeft()));
+			node.setLeft(insert(element, key, node.getLeft()));
 		}
-		int hL = node.getLeft().getHeight();
-		int hR = node.getRight().getHeight();
+		int hL = getHeight(node.getLeft());
+		int hR = getHeight(node.getRight());
 		node.setHeight(((hL>hR)?hL:hR)+1);
 		
 		int balance = getBalance(node);
@@ -101,12 +104,12 @@ public class AVLTree <T extends Comparable<T>, K> implements IAVLTree<T, K>{
 		if(balance > 1) {
 			if(element.compareTo(node.getLeft().getData()) < 0) {
 				return rightRotate(node);
-			}else if(element.compareTo(node.getRight().getData()) > 0) {
+			}else if(element.compareTo(node.getLeft().getData()) >= 0) {
 				node.setLeft(leftRotate(node.getLeft()));
 				return rightRotate(node);
 			}
 		}else if(balance < -1) {
-			if(element.compareTo(node.getRight().getData()) > 0) {
+			if(element.compareTo(node.getRight().getData()) >= 0) {
 				return leftRotate(node);
 			}else if(element.compareTo(node.getRight().getData()) < 0) {
 				node.setRight(rightRotate(node.getRight()));
@@ -182,5 +185,42 @@ public class AVLTree <T extends Comparable<T>, K> implements IAVLTree<T, K>{
 			root = root.getRight();
 		}
 		return root;
+	}
+	
+	public List<K> getEquals(T value){
+		if(!isEmpty()) {		
+			return getEquals(value, root);
+		} else return null;
+	}
+	public List<K> getEquals(T value, AVLTreeNode<T, K> node){
+		List<K> players = new ArrayList<K>();
+		while(!value.equals(node.getData()) && node != null) {
+			if(value.compareTo(node.getData()) > 0) {
+				if(node.getRight() != null) {
+					node = node.getRight();
+				}else return null;
+			}else if(value.compareTo(node.getData()) < 0) {
+				if(node.getRight() != null) {
+					node = node.getLeft();
+				}else return null;
+			}
+		}
+		if(node != null) {
+			boolean equals = true;
+			players.add(node.getKey());
+			while(node.getRight() != null && equals) {
+				node = node.getRight();
+				if(value.equals(node.getData())) {
+					players.add(node.getKey());
+				}else equals = false;
+			}
+		}
+		return players;
+	}
+	public List<K> getLess(){
+		return null;
+	}
+	public List<K> getHigher(){
+		return null;
 	}
 }

@@ -14,8 +14,9 @@ public class AVLTreeNode<T, K> {
 		height = 1;
 	}
 	
-	public AVLTreeNode(T data) {
+	public AVLTreeNode(T data, K k) {
 		element = data;
+		key = k;
 		height = 1;
 	}
 	
