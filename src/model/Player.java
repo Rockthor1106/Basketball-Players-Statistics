@@ -7,13 +7,13 @@ public class Player {
 	private int age;
 	
 	// Datos estadisticos.
-	private float pointsPerGame;
-	private float reboundPerGame;
-	//private float assistsPerGame;
-	//private float robberiesPerGame;
-	//private float blocksPerGame;
+	private double pointsPerGame;
+	private double reboundPerGame;
+	//private double assistsPerGame;
+	//private double robberiesPerGame;
+	//private double blocksPerGame;
 	
-	public Player(String n, String ls, String t, int a, float ppg, float rpg/*, float apg, float rbpg, float bpg*/) {
+	public Player(String n, String ls, String t, int a, double ppg, double rpg/*, double apg, double rbpg, double bpg*/) {
 		name = n;
 		lastName = ls;
 		team = t;
@@ -42,43 +42,43 @@ public class Player {
 		return age;
 	}
 
-	public float getPointsPerGame() {
+	public double getPointsPerGame() {
 		return pointsPerGame;
 	}
 
-	public void setPointsPerGame(float pointsPerGame) {
+	public void setPointsPerGame(double pointsPerGame) {
 		this.pointsPerGame = pointsPerGame;
 	}
 
-	public float getReboundPerGame() {
+	public double getReboundPerGame() {
 		return reboundPerGame;
 	}
 
-	public void setReboundPerGame(float reboundPerGame) {
+	public void setReboundPerGame(double reboundPerGame) {
 		this.reboundPerGame = reboundPerGame;
 	}
 	/*
-	public float getAssistsPerGame() {
+	public double getAssistsPerGame() {
 		return assistsPerGame;
 	}
 
-	public void setAssistsPerGame(float assistsPerGame) {
+	public void setAssistsPerGame(double assistsPerGame) {
 		this.assistsPerGame = assistsPerGame;
 	}
 
-	public float getRobberiesPerGame() {
+	public double getRobberiesPerGame() {
 		return robberiesPerGame;
 	}
 
-	public void setRobberiesPerGame(float robberiesPerGame) {
+	public void setRobberiesPerGame(double robberiesPerGame) {
 		this.robberiesPerGame = robberiesPerGame;
 	}
 
-	public float getBlocksPerGame() {
+	public double getBlocksPerGame() {
 		return blocksPerGame;
 	}
 
-	public void setBlocksPerGame(float blocksPerGame) {
+	public void setBlocksPerGame(double blocksPerGame) {
 		this.blocksPerGame = blocksPerGame;
 	}
 	*/

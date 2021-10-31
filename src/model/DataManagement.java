@@ -3,6 +3,8 @@ package model;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import datastructure.AVLTree;
 import datastructure.HashTable;
@@ -10,18 +12,22 @@ import datastructure.HashTable;
 public class DataManagement {
 	
 	public HashTable<Integer, Player> dataTable;
-	public AVLTree<Float, Integer> pointsPerGame;
-	public AVLTree<Float, Integer> reboundsPerGame;
-	public AVLTree<Float, Integer> assistsPerGame;
-	public AVLTree<Float, Integer> robberiesPerGame;
+	public AVLTree<Double, Integer> pointsPerGame;
+	public AVLTree<Double, Integer> reboundsPerGame;
+	public AVLTree<Double, Integer> assistsPerGame;
+	public AVLTree<Double, Integer> robberiesPerGame;
 	public final int size = 1000;
 	
 	public DataManagement() throws IOException {
 		dataTable = new HashTable<>(size);
-		
+		pointsPerGame = new AVLTree<>();
+		reboundsPerGame = new AVLTree<>();
+		assistsPerGame = new AVLTree<>();
+		robberiesPerGame = new AVLTree<>();
 		importData("data/data.csv");
 		
-		System.out.println(printPlayers());
+		List<Player> players = getStadisticPPG("Igual", 50);
+		System.out.println(printPlayers(players));
 	}
 	
 	public HashTable<Integer, Player> getDataTable() {
@@ -39,10 +45,12 @@ public class DataManagement {
 			String ls = pData[2];
 			String t = "huevos"; //Nombre del equipo.
 			int age = Integer.parseInt(pData[3]);
-			float ppg = Float.parseFloat(pData[4]);
-			float rpg = Float.parseFloat(pData[5]);
+			double ppg = Double.parseDouble(pData[4]);
+			double rpg = Double.parseDouble(pData[5]);
 			Player newPlayer = new Player(n, ls, t, age, ppg, rpg);
+			
 			dataTable.addItem(key, newPlayer);
+			pointsPerGame.insert(ppg, key);
 			
 			line = br.readLine();
 		}
@@ -54,5 +62,26 @@ public class DataManagement {
 			players += dataTable.getItem(new Integer(i));
 		}
 		return players;
+	}
+	
+	public List<Player> getStadisticPPG(String valueType, double value) {
+		List<Player> players = new ArrayList<>();
+		if(valueType.equalsIgnoreCase("igual")) {
+			List<Integer> pK = pointsPerGame.getEquals(new Double(value));
+			if(pK != null) {
+				for(int i: pK) {
+					players.add(dataTable.getItem(i));
+				}
+			}
+		}
+		return players;
+	}
+	
+	public String printPlayers(List<Player> players) {
+		String str = "";
+		for(Player i: players) {
+			str += i.toString();
+		}
+		return str;
 	}
 }
