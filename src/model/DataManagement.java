@@ -4,11 +4,16 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import datastructure.AVLTree;
 import datastructure.HashTable;
 
 public class DataManagement {
 	
 	public HashTable<Integer, Player> dataTable;
+	public AVLTree<Float, Integer> pointsPerGame;
+	public AVLTree<Float, Integer> reboundsPerGame;
+	public AVLTree<Float, Integer> assistsPerGame;
+	public AVLTree<Float, Integer> robberiesPerGame;
 	public final int size = 1000;
 	
 	public DataManagement() throws IOException {

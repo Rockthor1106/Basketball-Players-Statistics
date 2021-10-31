@@ -1,15 +1,15 @@
 package datastructure;
 
-public class AVLTree <T extends Comparable<T>> implements IAVLTree<T>{
+public class AVLTree <T extends Comparable<T>, K> implements IAVLTree<T, K>{
 
-	AVLTreeNode<T> root;
+	AVLTreeNode<T, K> root;
 	
 	public AVLTree() {
 		root = null;
 	}
 	
 	public AVLTree(T r) {
-		root = new AVLTreeNode<T>(r);
+		root = new AVLTreeNode<T, K>(r);
 	}
 	//Revisa si el arbol se encuentra vacio.
 	@Override
@@ -18,28 +18,28 @@ public class AVLTree <T extends Comparable<T>> implements IAVLTree<T>{
 	}
 	//Obtener la altura de un arbol. Evita complicaciones con nodos == null.
 	@Override
-	public int getHeight(AVLTreeNode<T> n) {
+	public int getHeight(AVLTreeNode<T, K> n) {
 		if(n == null) {
 			return 0;
 		}else return n.getHeight();
 	}
 	@Override
-	public void changeHeight(AVLTreeNode<T> node) {
+	public void changeHeight(AVLTreeNode<T, K> node) {
 		int hL = getHeight(node.getLeft());
 		int hR = getHeight(node.getRight());
 		node.setHeight(((hL>hR)?hL:hR)+1);
 	}
 	//Obtiene el factor de balance del subarbol n.
 	@Override
-	public int getBalance(AVLTreeNode<T> n) {
+	public int getBalance(AVLTreeNode<T, K> n) {
 		if(n == null) {
 			return 0;
 		}else return getHeight(n.getLeft())-getHeight(n.getRight());
 	}
 	//Rotación izquierda del subarbol node.
 	@Override
-	public AVLTreeNode<T> leftRotate(AVLTreeNode<T> node){
-		AVLTreeNode<T> temp = node.getRight();
+	public AVLTreeNode<T, K> leftRotate(AVLTreeNode<T, K> node){
+		AVLTreeNode<T, K> temp = node.getRight();
 		
 		node.setRight(temp.getLeft());
 
@@ -57,8 +57,8 @@ public class AVLTree <T extends Comparable<T>> implements IAVLTree<T>{
 	}
 	//Rotación derecha del subarbol node.
 	@Override
-	public AVLTreeNode<T> rightRotate(AVLTreeNode<T> node){
-		AVLTreeNode<T> temp = node.getLeft();
+	public AVLTreeNode<T, K> rightRotate(AVLTreeNode<T, K> node){
+		AVLTreeNode<T, K> temp = node.getLeft();
 		
 		node.setLeft(temp.getRight());
 		
@@ -76,14 +76,14 @@ public class AVLTree <T extends Comparable<T>> implements IAVLTree<T>{
 	}
 	//Insertar un nuevo nodo.
 	@Override
-	public AVLTreeNode<T> insert(T element) {
+	public AVLTreeNode<T, K> insert(T element) {
 		if(root == null) {
 			root = new AVLTreeNode<>(element);
 			return root;
 		}else return insert(element, root);
 	}
 	
-	public AVLTreeNode<T> insert(T element, AVLTreeNode<T> node) {
+	public AVLTreeNode<T, K> insert(T element, AVLTreeNode<T, K> node) {
 		if(node == null) {
 			return (new AVLTreeNode<>(element));
 		}
@@ -117,20 +117,20 @@ public class AVLTree <T extends Comparable<T>> implements IAVLTree<T>{
 	}
 	//Eliminar un nodo.
 	@Override
-	public AVLTreeNode<T> delete(T element){
+	public AVLTreeNode<T, K> delete(T element){
 		if(isEmpty()) {
 			return root;
 		}else return delete(element, root);
 	}
 	
-	public AVLTreeNode<T> delete(T element, AVLTreeNode<T> node){
+	public AVLTreeNode<T, K> delete(T element, AVLTreeNode<T, K> node){
 		if(element.compareTo(node.getData()) > 0) {
 			node.setLeft(delete(element, node.getRight()));
 		}else if(element.compareTo(node.getData()) < 0) {
 			node.setRight(delete(element, node.getRight()));
 		}else {
 			if(node.getLeft() == null || node.getRight() == null) {
-				AVLTreeNode<T> temp;
+				AVLTreeNode<T, K> temp;
 				if(node.getLeft() != null) {
 					temp = node.getLeft();
 				}else {
@@ -142,7 +142,7 @@ public class AVLTree <T extends Comparable<T>> implements IAVLTree<T>{
 					node = null;
 				}else node = temp;
 			}else {
-				AVLTreeNode<T> temp = getMin(node.getRight());
+				AVLTreeNode<T, K> temp = getMin(node.getRight());
 				node.setData(temp.getData());
 				node.setRight(delete(temp.getData(), node.getRight()));
 			}
@@ -169,7 +169,7 @@ public class AVLTree <T extends Comparable<T>> implements IAVLTree<T>{
 	}
 	//Obtener el valor minimo.
 	@Override
-	public AVLTreeNode<T> getMin(AVLTreeNode<T> root){
+	public AVLTreeNode<T, K> getMin(AVLTreeNode<T, K> root){
 		while(root.getLeft() != null) {
 			root = root.getLeft();
 		}
@@ -177,7 +177,7 @@ public class AVLTree <T extends Comparable<T>> implements IAVLTree<T>{
 	}
 	//Obtener el valor máximo.
 	@Override
-	public AVLTreeNode<T> getMax(AVLTreeNode<T> root){
+	public AVLTreeNode<T, K> getMax(AVLTreeNode<T, K> root){
 		while(root.getRight() != null) {
 			root = root.getRight();
 		}
