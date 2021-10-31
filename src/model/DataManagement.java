@@ -24,6 +24,10 @@ public class DataManagement {
 		System.out.println(printPlayers());
 	}
 	
+	public HashTable<Integer, Player> getDataTable() {
+		return dataTable;
+	}
+	
 	public void importData(String filename) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(filename));
 		br.readLine(); //lee la primera linea con los nombres de las columnas.

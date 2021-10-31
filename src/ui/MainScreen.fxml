@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="878.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <BorderPane fx:id="mainPane" prefHeight="102.0" prefWidth="878.0" BorderPane.alignment="CENTER">
+         <center>
+            <Label text="Basketball Players Statistics" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+         </center>
+         <bottom>
+            <MenuBar cache="true" BorderPane.alignment="CENTER">
+              <menus>
+                <Menu mnemonicParsing="false" text="Options">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Search Player" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#displayCredits" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+         </bottom>
+      </BorderPane>
+   </top>
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <right>
+            <BorderPane prefHeight="576.0" prefWidth="45.0" BorderPane.alignment="CENTER" />
+         </right>
+         <left>
+            <BorderPane prefHeight="576.0" prefWidth="45.0" BorderPane.alignment="CENTER" />
+         </left>
+         <top>
+            <BorderPane prefHeight="32.0" prefWidth="878.0" BorderPane.alignment="CENTER" />
+         </top>
+         <center>
+            <TableView fx:id="tvPlayersInfo" prefHeight="576.0" prefWidth="808.0" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn fx:id="tcName" prefWidth="111.0" text="Name" />
+                <TableColumn fx:id="tcLastName" prefWidth="101.0" text="Last Name" />
+              </columns>
+            </TableView>
+         </center>
+      </BorderPane>
+   </center>
+   <bottom>
+      <BorderPane prefHeight="32.0" prefWidth="878.0" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>
