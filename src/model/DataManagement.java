@@ -8,8 +8,8 @@ import datastructure.HashTable;
 
 public class DataManagement {
 	
-	public HashTable<Integer, Player> dataTable;
-	public final int size = 1000;
+	private HashTable<Integer, Player> dataTable;
+	private final int size = 1000;
 	
 	public DataManagement() throws IOException {
 		dataTable = new HashTable<>(size);
@@ -17,6 +17,10 @@ public class DataManagement {
 		importData("data/data.csv");
 		
 		System.out.println(printPlayers());
+	}
+	
+	public HashTable<Integer, Player> getDataTable() {
+		return dataTable;
 	}
 	
 	public void importData(String filename) throws IOException {
