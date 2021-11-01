@@ -25,9 +25,6 @@ public class DataManagement {
 		assistsPerGame = new AVLTree<>();
 		robberiesPerGame = new AVLTree<>();
 		importData("data/data_200k.csv");
-	
-		System.out.println(dataTable.getSize());
-		System.out.println(pointsPerGame.getSize());
 	}
 	
 	public HashTable<Integer, Player> getDataTable() {
@@ -64,12 +61,57 @@ public class DataManagement {
 		System.out.println("Se demoro en leer: "+ (timeFinal-timeStart));
 		br.close();
 	}
-	public String printPlayers() {
-		String players = "";
-		for(int i = 0; i<SIZE; i++) {
-			players += dataTable.getItem(new Integer(i));
+	//METODO SIMPLIFICADO PARA BUSCAR LISTA DE JUGADORES.
+	public List<Player> getStadistic(String stadistic, String valueType, double value){
+		List<Player> players = new ArrayList<>();
+		switch(stadistic) {
+			case "Points Per Game":
+				players = getStadistic(pointsPerGame, valueType, value);
+				break;
+			case "Rebounds Per Game":
+				players = getStadistic(reboundsPerGame, valueType, value);
+				break;
+			case "Assists Per Game":
+				players = getStadistic(assistsPerGame, valueType, value);
+				break;
+			case "Robberies Per Game":
+				players = getStadistic(robberiesPerGame, valueType, value);
+				break;
+			case "Blocks Per Game":
+				players = getStadisticBPG(valueType, value);
+				break;
 		}
 		return players;
+	}
+	public List<Player> getStadistic(AVLTree<Double, Integer> tree, String valueType, double value){
+		List<Player> players = new ArrayList<>();
+		switch(valueType) {
+			case "Igual":
+				List<Integer> pKE = tree.getEquals(new Double(value));
+				if(pKE != null) {
+					for(int i: pKE) {
+						players.add(dataTable.getItem(i));
+					}
+				}
+				break;
+			case "Menor":
+				List<Integer> pKL = tree.getLess(new Double(value));
+				if(pKL != null) {
+					for(int i: pKL) {
+						players.add(dataTable.getItem(i));
+					}
+				}
+				break;
+ 			case "Mayor":
+				List<Integer> pKH = tree.getHigher(new Double(value));
+				if(pKH != null) {
+					for(int i: pKH) {
+						players.add(dataTable.getItem(i));
+					}
+				}
+				break;
+		}
+		return players;	
 	}
 	//BUSCAR LISTA DE JUGADORES POR 'PUNTOS POR JUEGO'. AVL
 	public List<Player> getStadisticPPG(String valueType, double value) {
@@ -223,7 +265,8 @@ public class DataManagement {
 		}
 		return players;
 	}
- 	public List<Player> getDataWithTwoCriteria(String criterionF, String vTypeF, double valueF, String criterionS, String vTypeS, double valueS){
+ 	//BUSCAR LISTA DE JUGADORES POR MEDIO DE DOS CRITERIOS DE BUSQUEDA.
+	public List<Player> getDataWithTwoCriteria(String criterionF, String vTypeF, double valueF, String criterionS, String vTypeS, double valueS){
  		List<Player> players = new ArrayList<>();
  		switch(criterionF) {
  			case "Points Per Game":
@@ -272,7 +315,6 @@ public class DataManagement {
  		}
  		return solution;
  	}
- 	//Ordenar por medio del segundo criterio.
 	public AVLTree<Double, Integer> subTree(List<Player> players, String type) {
 		if(!players.isEmpty()) {
 			AVLTree<Double, Integer> temp = new AVLTree<>();
@@ -302,6 +344,13 @@ public class DataManagement {
 		}else return null;
 	}
 	
+	public String printPlayers() {
+		String players = "";
+		for(int i = 0; i<SIZE; i++) {
+			players += dataTable.getItem(new Integer(i));
+		}
+		return players;
+	}
 	public String printPlayers(List<Player> players) {
 		String str = "";
 		for(Player i: players) {
