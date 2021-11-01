@@ -11,7 +11,7 @@ import datastructure.HashTable;
 
 public class DataManagement {
 	
-	public final int SIZE = 200000;
+	public int SIZE = 200000;
 	public HashTable<Integer, Player> dataTable;
 	public AVLTree<Double, Integer> pointsPerGame;
 	public AVLTree<Double, Integer> reboundsPerGame;
@@ -26,9 +26,27 @@ public class DataManagement {
 		robberiesPerGame = new AVLTree<>();
 		importData("data/data_200k.csv");
 	}
-	
-	public HashTable<Integer, Player> getDataTable() {
+	public HashTable<Integer, Player> getDataTable(){
 		return dataTable;
+	}
+	public AVLTree<Double, Integer> getPointsPerGame(){
+		return pointsPerGame;
+	}
+	public AVLTree<Double, Integer> getRoboundsPerGame(){
+		return reboundsPerGame;
+	}
+	public AVLTree<Double, Integer> getAssistsPerGame(){
+		return assistsPerGame;
+	}
+	public AVLTree<Double, Integer> getRobberiesPerGame(){
+		return robberiesPerGame;
+	}
+	public void clearAll() {
+		dataTable = new HashTable<>(SIZE);
+		pointsPerGame = new AVLTree<>();
+		reboundsPerGame = new AVLTree<>();
+		assistsPerGame = new AVLTree<>();
+		robberiesPerGame = new AVLTree<>();
 	}
 	//LEER DATOS
 	public void importData(String filename) throws IOException {
@@ -60,6 +78,15 @@ public class DataManagement {
 		long timeFinal = System.currentTimeMillis();
 		System.out.println("Se demoro en leer: "+ (timeFinal-timeStart));
 		br.close();
+	}
+	public void addNewPlayer(String name, String lastN, String team, int age, double ppg, double rpg, double apg, double rbpg, double bpg) {
+		Player newP = new Player(SIZE, name, lastN, team, age, ppg, rpg, apg, rbpg, bpg);
+		dataTable.addItem(SIZE, newP);
+		pointsPerGame.insert(ppg, SIZE);
+		reboundsPerGame.insert(rpg, SIZE);
+		assistsPerGame.insert(apg, SIZE);
+		robberiesPerGame.insert(rbpg, SIZE);
+		SIZE++;
 	}
 	//METODO SIMPLIFICADO PARA BUSCAR LISTA DE JUGADORES.
 	public List<Player> getStadistic(String stadistic, String valueType, double value){
