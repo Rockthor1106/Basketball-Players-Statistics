@@ -144,7 +144,7 @@ public class DataManagement {
 	public List<Player> getStadisticPPG(String valueType, double value) {
 		List<Player> players = new ArrayList<>();
 		switch(valueType) {
-			case "Igual":
+			case "Equals to":
 				List<Integer> pKE = pointsPerGame.getEquals(new Double(value));
 				if(pKE != null) {
 					for(int i: pKE) {
@@ -152,7 +152,7 @@ public class DataManagement {
 					}
 				}
 				break;
-			case "Menor":
+			case "Less than":
 				List<Integer> pKL = pointsPerGame.getLess(new Double(value));
 				if(pKL != null) {
 					for(int i: pKL) {
@@ -160,7 +160,7 @@ public class DataManagement {
 					}
 				}
 				break;
- 			case "Mayor":
+ 			case "Greater than":
 				List<Integer> pKH = pointsPerGame.getHigher(new Double(value));
 				if(pKH != null) {
 					for(int i: pKH) {
@@ -175,7 +175,7 @@ public class DataManagement {
 	public List<Player> getStadisticRPG(String valueType, double value) {
 		List<Player> players = new ArrayList<>();
 		switch(valueType) {
-			case "Igual":
+			case "Equals to":
 				List<Integer> pKE = reboundsPerGame.getEquals(new Double(value));
 				if(pKE != null) {
 					for(int i: pKE) {
@@ -183,7 +183,7 @@ public class DataManagement {
 					}
 				}
 				break;
-			case "Menor":
+			case "Less than":
 				List<Integer> pKL = reboundsPerGame.getLess(new Double(value));
 				if(pKL != null) {
 					for(int i: pKL) {
@@ -191,7 +191,7 @@ public class DataManagement {
 					}
 				}
 				break;
-			case "Mayor":
+			case "Greater than":
 				List<Integer> pKH = reboundsPerGame.getHigher(new Double(value));
 				if(pKH != null) {
 					for(int i: pKH) {
@@ -206,7 +206,7 @@ public class DataManagement {
 	public List<Player> getStadisticAPG(String valueType, double value) {
 		List<Player> players = new ArrayList<>();
 		switch(valueType) {
-			case "Igual":
+			case "Equals to":
 				List<Integer> pKE = assistsPerGame.getEquals(new Double(value));
 				if(pKE != null) {
 					for(int i: pKE) {
@@ -214,7 +214,7 @@ public class DataManagement {
 					}
 				}
 				break;
-			case "Menor":
+			case "Less than":
 				List<Integer> pKL = assistsPerGame.getLess(new Double(value));
 				if(pKL != null) {
 					for(int i: pKL) {
@@ -222,7 +222,7 @@ public class DataManagement {
 					}
 				}
 				break;
-			case "Mayor":
+			case "Greater than":
 				List<Integer> pKH = assistsPerGame.getHigher(new Double(value));
 				if(pKH != null) {
 					for(int i: pKH) {
@@ -237,7 +237,7 @@ public class DataManagement {
 	public List<Player> getStadisticRBPG(String valueType, double value) {
 		List<Player> players = new ArrayList<>();
 		switch(valueType) {
-			case "Igual":
+			case "Equals to":
 				List<Integer> pKE = robberiesPerGame.getEquals(new Double(value));
 				if(pKE != null) {
 					for(int i: pKE) {
@@ -245,7 +245,7 @@ public class DataManagement {
 					}
 				}
 				break;
-			case "Menor":
+			case "Less than":
 				List<Integer> pKL = robberiesPerGame.getLess(new Double(value));
 				if(pKL != null) {
 					for(int i: pKL) {
@@ -253,7 +253,7 @@ public class DataManagement {
 					}
 				}
 				break;
-			case "Mayor":
+			case "Greater than":
 				List<Integer> pKH = robberiesPerGame.getHigher(new Double(value));
 				if(pKH != null) {
 					for(int i: pKH) {
@@ -268,21 +268,21 @@ public class DataManagement {
 	public List<Player> getStadisticBPG(String valueType, double value){
 		List<Player> players = new ArrayList<>();
 		switch(valueType) {
-			case "Igual":
+			case "Equals to":
 				for(int i = 0; i<dataTable.getSize(); i++) {
 					if(dataTable.getItem(i).getBlocksPerGame() == value) {
 						players.add(dataTable.getItem(i));
 					}
 				}
 				break;
-			case "Menor":
+			case "Less than":
 				for(int i = 0; i<dataTable.getSize(); i++) {
 					if(dataTable.getItem(i).getBlocksPerGame() < value) {
 						players.add(dataTable.getItem(i));
 					}
 				}
 				break;
-			case "Mayor":
+			case "Greater than":
 				for(int i = 0; i<dataTable.getSize(); i++) {
 					if(dataTable.getItem(i).getBlocksPerGame() > value) {
 						players.add(dataTable.getItem(i));
