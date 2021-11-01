@@ -8,22 +8,21 @@ public class Player {
 	
 	// Datos estadisticos.
 	private double pointsPerGame;
-	private double reboundPerGame;
-	//private double assistsPerGame;
-	//private double robberiesPerGame;
-	//private double blocksPerGame;
+	private double reboundsPerGame;
+	private double assistsPerGame;
+	private double robberiesPerGame;
+	private double blocksPerGame;
 	
-	public Player(String n, String ls, String t, int a, double ppg, double rpg/*, double apg, double rbpg, double bpg*/) {
+	public Player(String n, String ls, String t, int a, double ppg, double rpg, double apg, double rbpg, double bpg) {
 		name = n;
 		lastName = ls;
 		team = t;
 		age = a;
-		
-		setPointsPerGame(ppg);
-		setReboundPerGame(rpg);
-		//setAssistsPerGame(apg);
-		//setRobberiesPerGame(rbpg);
-		//setBlocksPerGame(bpg);
+		pointsPerGame = ppg;
+		reboundsPerGame = rpg;
+		assistsPerGame = apg;
+		robberiesPerGame = rbpg;
+		blocksPerGame = bpg;
 	}
 
 	public String getName() {
@@ -50,14 +49,14 @@ public class Player {
 		this.pointsPerGame = pointsPerGame;
 	}
 
-	public double getReboundPerGame() {
-		return reboundPerGame;
+	public double getReboundsPerGame() {
+		return reboundsPerGame;
 	}
 
-	public void setReboundPerGame(double reboundPerGame) {
-		this.reboundPerGame = reboundPerGame;
+	public void setReboundsPerGame(double reboundPerGame) {
+		this.reboundsPerGame = reboundPerGame;
 	}
-	/*
+	
 	public double getAssistsPerGame() {
 		return assistsPerGame;
 	}
@@ -81,7 +80,7 @@ public class Player {
 	public void setBlocksPerGame(double blocksPerGame) {
 		this.blocksPerGame = blocksPerGame;
 	}
-	*/
+	
 	public String toString() {
 		String str = "";
 		str += getTeam()+", ";
@@ -90,10 +89,10 @@ public class Player {
 		str += getAge()+"\n";
 		
 		str += getPointsPerGame()+" ";
-		str += getReboundPerGame()+" ";
-		//str += getAssistsPerGame()+" ";
-		//str += getRobberiesPerGame()+" ";
-		//str += getBlocksPerGame();
+		str += getReboundsPerGame()+" ";
+		str += getAssistsPerGame()+" ";
+		str += getRobberiesPerGame()+" ";
+		str += getBlocksPerGame();
 		str += "\n";
 		return str;
 	}

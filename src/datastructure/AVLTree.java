@@ -10,12 +10,23 @@ public class AVLTree <T extends Comparable<T>, K> implements IAVLTree<T, K>{
 	public AVLTree() {
 		root = null;
 	}
-	
 	public AVLTree(T r, K k) {
 		root = new AVLTreeNode<T, K>(r, k);
 	}
 	public AVLTreeNode<T, K> getRoot(){
 		return root;
+	}
+	//Cantidad de nodos en el arbol.
+	@Override
+	public int getSize() {
+		return getSize(root);
+	}
+	public int getSize(AVLTreeNode<T, K> root) {
+		if(root == null) {
+			return 0;
+		}else {
+			return getSize(root.getLeft())+getSize(root.getRight())+1;
+		}
 	}
 	//Revisa si el arbol se encuentra vacio.
 	@Override
@@ -29,6 +40,7 @@ public class AVLTree <T extends Comparable<T>, K> implements IAVLTree<T, K>{
 			return 0;
 		}else return n.getHeight();
 	}
+	//Actualiza la altura de un arbol.
 	@Override
 	public int changeHeight(AVLTreeNode<T, K> node) {
 		int hL = getHeight(node.getLeft());
@@ -146,10 +158,10 @@ public class AVLTree <T extends Comparable<T>, K> implements IAVLTree<T, K>{
 		return node;
 	}
 	//Obtener el valor minimo.
+	@Override
 	public AVLTreeNode<T, K> getMin(){
 		return getMin(root);
 	}
-	@Override
 	public AVLTreeNode<T, K> getMin(AVLTreeNode<T, K> root){
 		while(root.getLeft() != null) {
 			root = root.getLeft();
@@ -157,17 +169,18 @@ public class AVLTree <T extends Comparable<T>, K> implements IAVLTree<T, K>{
 		return root;
 	}
 	//Obtener el valor máximo.
+	@Override
 	public AVLTreeNode<T, K> getMax(){
 		return getMax(root);
 	}
-	@Override
 	public AVLTreeNode<T, K> getMax(AVLTreeNode<T, K> root){
 		while(root.getRight() != null) {
 			root = root.getRight();
 		}
 		return root;
 	}
-	
+	//Obtener jugadores con valor igual a T:value
+	@Override
 	public List<K> getEquals(T value){
 		if(!isEmpty()) {		
 			return getEquals(value, root);
@@ -198,7 +211,8 @@ public class AVLTree <T extends Comparable<T>, K> implements IAVLTree<T, K>{
 		}
 		return players;
 	}
-	
+	//Obtener jugadores con valor menor a T:value
+	@Override
 	public List<K> getLess(T value){
 		if(!isEmpty()) {
 			return getLess(value, root);
@@ -243,7 +257,8 @@ public class AVLTree <T extends Comparable<T>, K> implements IAVLTree<T, K>{
 			return pK;
 		}
 	}
-	
+	//Obtener jugadores con valor mayor a T:value
+	@Override
 	public List<K> getHigher(T value){
 		if(!isEmpty()) {
 			return getHigher(value, root);
@@ -290,7 +305,8 @@ public class AVLTree <T extends Comparable<T>, K> implements IAVLTree<T, K>{
 			return pK;
 		}
 	}
-	
+	//Obtener las K:keys de un arbol en pre orden.
+	@Override
 	public String preOrder(AVLTreeNode<T, K> node) {
 		if(node == null) {
 			return "";

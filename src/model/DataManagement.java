@@ -11,63 +11,67 @@ import datastructure.HashTable;
 
 public class DataManagement {
 	
+	public final int SIZE = 200000;
 	public HashTable<Integer, Player> dataTable;
 	public AVLTree<Double, Integer> pointsPerGame;
 	public AVLTree<Double, Integer> reboundsPerGame;
 	public AVLTree<Double, Integer> assistsPerGame;
 	public AVLTree<Double, Integer> robberiesPerGame;
-	public final int size = 200000;
 	
 	public DataManagement() throws IOException {
-		dataTable = new HashTable<>(size);
+		dataTable = new HashTable<>(SIZE);
 		pointsPerGame = new AVLTree<>();
 		reboundsPerGame = new AVLTree<>();
 		assistsPerGame = new AVLTree<>();
 		robberiesPerGame = new AVLTree<>();
 		importData("data/data_200k.csv");
 	
-		List<Player> players = getStadisticPPG("Menor", 57);
-		System.out.println(printPlayers(players));
-		players = getStadisticPPG("Igual", 57);
-		System.out.println(printPlayers(players));
-		players = getStadisticPPG("Mayor", 57);
-		System.out.println(printPlayers(players));
+		System.out.println(dataTable.getSize());
+		System.out.println(pointsPerGame.getSize());
 	}
 	
 	public HashTable<Integer, Player> getDataTable() {
 		return dataTable;
 	}
-	
+	//LEER DATOS
 	public void importData(String filename) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(filename));
 		br.readLine(); //lee la primera linea con los nombres de las columnas.
 		String line = br.readLine();
+		long timeStart = System.currentTimeMillis();
 		while(line != null) {
 			String[] pData = line.split(",");
 			Integer key = new Integer(Integer.parseInt(pData[0])-1);
-			String n = pData[1];
-			String ls = pData[2];
+			String name = pData[1];
+			String lastN = pData[2];
 			int age = Integer.parseInt(pData[3]);
-			String t = pData[4];
+			String team = pData[4];
 			double ppg = Double.parseDouble(pData[5]);
 			double rpg = Double.parseDouble(pData[6]);
-			Player newPlayer = new Player(n, ls, t, age, ppg, rpg);
+			double apg = Double.parseDouble(pData[7]);
+			double rbpg = Double.parseDouble(pData[8]);
+			double bpg = Double.parseDouble(pData[9]);
+			Player newPlayer = new Player(name, lastN, team, age, ppg, rpg, apg, rbpg, bpg);
 			
 			dataTable.addItem(key, newPlayer);
 			pointsPerGame.insert(ppg, key);
 			reboundsPerGame.insert(rpg, key);
+			assistsPerGame.insert(apg, key);
+			robberiesPerGame.insert(rbpg, key);
 			line = br.readLine();
 		}
+		long timeFinal = System.currentTimeMillis();
+		System.out.println("Se demoro en leer: "+ (timeFinal-timeStart));
 		br.close();
 	}
 	public String printPlayers() {
 		String players = "";
-		for(int i = 0; i<size; i++) {
+		for(int i = 0; i<SIZE; i++) {
 			players += dataTable.getItem(new Integer(i));
 		}
 		return players;
 	}
-	//BUSCAR LISTA DE JUGADORES POR 'PUNTOS POR JUEGO'
+	//BUSCAR LISTA DE JUGADORES POR 'PUNTOS POR JUEGO'. AVL
 	public List<Player> getStadisticPPG(String valueType, double value) {
 		List<Player> players = new ArrayList<>();
 		switch(valueType) {
@@ -87,7 +91,7 @@ public class DataManagement {
 					}
 				}
 				break;
-			case "Mayor":
+ 			case "Mayor":
 				List<Integer> pKH = pointsPerGame.getHigher(new Double(value));
 				if(pKH != null) {
 					for(int i: pKH) {
@@ -98,12 +102,12 @@ public class DataManagement {
 		}
 		return players;
 	}
-	//FALTA. BUSCAR LISTA DE JUGADORES POR 'REBOTES POR JUEGO'
+	//BUSCAR LISTA DE JUGADORES POR 'REBOTES POR JUEGO'. AVL
 	public List<Player> getStadisticRPG(String valueType, double value) {
 		List<Player> players = new ArrayList<>();
 		switch(valueType) {
 			case "Igual":
-				List<Integer> pKE = pointsPerGame.getEquals(new Double(value));
+				List<Integer> pKE = reboundsPerGame.getEquals(new Double(value));
 				if(pKE != null) {
 					for(int i: pKE) {
 						players.add(dataTable.getItem(i));
@@ -111,7 +115,7 @@ public class DataManagement {
 				}
 				break;
 			case "Menor":
-				List<Integer> pKL = pointsPerGame.getLess(new Double(value));
+				List<Integer> pKL = reboundsPerGame.getLess(new Double(value));
 				if(pKL != null) {
 					for(int i: pKL) {
 						players.add(dataTable.getItem(i));
@@ -119,7 +123,7 @@ public class DataManagement {
 				}
 				break;
 			case "Mayor":
-				List<Integer> pKH = pointsPerGame.getHigher(new Double(value));
+				List<Integer> pKH = reboundsPerGame.getHigher(new Double(value));
 				if(pKH != null) {
 					for(int i: pKH) {
 						players.add(dataTable.getItem(i));
@@ -129,12 +133,12 @@ public class DataManagement {
 		}
 		return players;
 	}
-	//FALTA. BUSCAR LISTA DE JUGADORES POR 'ASISTENCIAS POR JUEGO'
+	//BUSCAR LISTA DE JUGADORES POR 'ASISTENCIAS POR JUEGO'. AVL
 	public List<Player> getStadisticAPG(String valueType, double value) {
 		List<Player> players = new ArrayList<>();
 		switch(valueType) {
 			case "Igual":
-				List<Integer> pKE = pointsPerGame.getEquals(new Double(value));
+				List<Integer> pKE = assistsPerGame.getEquals(new Double(value));
 				if(pKE != null) {
 					for(int i: pKE) {
 						players.add(dataTable.getItem(i));
@@ -142,7 +146,7 @@ public class DataManagement {
 				}
 				break;
 			case "Menor":
-				List<Integer> pKL = pointsPerGame.getLess(new Double(value));
+				List<Integer> pKL = assistsPerGame.getLess(new Double(value));
 				if(pKL != null) {
 					for(int i: pKL) {
 						players.add(dataTable.getItem(i));
@@ -150,7 +154,7 @@ public class DataManagement {
 				}
 				break;
 			case "Mayor":
-				List<Integer> pKH = pointsPerGame.getHigher(new Double(value));
+				List<Integer> pKH = assistsPerGame.getHigher(new Double(value));
 				if(pKH != null) {
 					for(int i: pKH) {
 						players.add(dataTable.getItem(i));
@@ -160,12 +164,12 @@ public class DataManagement {
 		}
 		return players;
 	}
-	//FALTA. BUSCAR LISTA DE JUGADORES POR 'ROBOS POR JUEGO'
+	//BUSCAR LISTA DE JUGADORES POR 'ROBOS POR JUEGO'. AVL
 	public List<Player> getStadisticRBPG(String valueType, double value) {
 		List<Player> players = new ArrayList<>();
 		switch(valueType) {
 			case "Igual":
-				List<Integer> pKE = pointsPerGame.getEquals(new Double(value));
+				List<Integer> pKE = robberiesPerGame.getEquals(new Double(value));
 				if(pKE != null) {
 					for(int i: pKE) {
 						players.add(dataTable.getItem(i));
@@ -173,7 +177,7 @@ public class DataManagement {
 				}
 				break;
 			case "Menor":
-				List<Integer> pKL = pointsPerGame.getLess(new Double(value));
+				List<Integer> pKL = robberiesPerGame.getLess(new Double(value));
 				if(pKL != null) {
 					for(int i: pKL) {
 						players.add(dataTable.getItem(i));
@@ -181,7 +185,7 @@ public class DataManagement {
 				}
 				break;
 			case "Mayor":
-				List<Integer> pKH = pointsPerGame.getHigher(new Double(value));
+				List<Integer> pKH = robberiesPerGame.getHigher(new Double(value));
 				if(pKH != null) {
 					for(int i: pKH) {
 						players.add(dataTable.getItem(i));
@@ -191,7 +195,35 @@ public class DataManagement {
 		}
 		return players;
 	}
-	public String printPlayers(List<Player> players) {
+	//BUSCAR LISTA DE JUGADORES POR 'BLOQUEOS POR JUEGO'. HASHTABLE (LINEAL)
+	public List<Player> getStadisticBPG(String valueType, double value){
+		List<Player> players = new ArrayList<>();
+		switch(valueType) {
+			case "Igual":
+				for(int i = 0; i<dataTable.getSize(); i++) {
+					if(dataTable.getItem(i).getBlocksPerGame() == value) {
+						players.add(dataTable.getItem(i));
+					}
+				}
+				break;
+			case "Menor":
+				for(int i = 0; i<dataTable.getSize(); i++) {
+					if(dataTable.getItem(i).getBlocksPerGame() < value) {
+						players.add(dataTable.getItem(i));
+					}
+				}
+				break;
+			case "Mayor":
+				for(int i = 0; i<dataTable.getSize(); i++) {
+					if(dataTable.getItem(i).getBlocksPerGame() > value) {
+						players.add(dataTable.getItem(i));
+					}
+				}
+				break;			
+		}
+		return players;
+	}
+ 	public String printPlayers(List<Player> players) {
 		String str = "";
 		for(Player i: players) {
 			str += i.getPointsPerGame()+" ";
