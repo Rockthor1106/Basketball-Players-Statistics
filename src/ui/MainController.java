@@ -149,7 +149,6 @@ public class MainController {
     
     @FXML
     private TextField toSearch;
-    
 
     @FXML
     private ComboBox<String> searchingCriteria;
@@ -165,16 +164,30 @@ public class MainController {
 
     @FXML
     private TableColumn<Player, String> tcSearchedPlayerLastName;
+    
+    @FXML
+    private BorderPane secondaryPane;
 
 
     @FXML
     void search(ActionEvent event) throws IOException {
-    	if (filters.getSelectionModel().getSelectedItem().equals("Equals to")) {
-			playerInformationScreen();
+    	String criteria = "";
+    	if (searchingCriteria.getSelectionModel().getSelectedItem().equals("Points")) {
+    		criteria = "Points";
 		}
-    	initializeTableViewOfSearchedPlayersInformation();
-    	
-    
+    	else if (searchingCriteria.getSelectionModel().getSelectedItem().equals("Rebounds")) {
+			criteria = "Rebounds";
+		}
+    	else if (searchingCriteria.getSelectionModel().getSelectedItem().equals("Assists")) {
+			criteria = "Assists";
+		}
+    	else if (searchingCriteria.getSelectionModel().getSelectedItem().equals("Robberies")) {
+			criteria = "Robberies";
+		}
+    	else if (searchingCriteria.getSelectionModel().getSelectedItem().equals("Blocks")) {
+			criteria = "Blocks";
+		}
+    	initializeTableViewOfSearchedPlayersInformation(criteria);
     }
     
     public void initializeComboBoxOfCategories() {
@@ -191,16 +204,35 @@ public class MainController {
     	this.filters.setItems(filters);
     }
     
-    private void initializeTableViewOfSearchedPlayersInformation() {
-    	ObservableList<Player> observableList;
-    	ArrayList<Player> playersList = new ArrayList<>();
-    	for (int i = 0; i < dataManagement.getStadisticPPG(filters.getSelectionModel().getSelectedItem(), Double.parseDouble(toSearch.getText())).size(); i++) {
-			playersList.add(i, dataManagement.getStadisticPPG(filters.getSelectionModel().getSelectedItem(), Double.parseDouble(toSearch.getText())).get(i));
+    private void initializeTableViewOfSearchedPlayersInformation(String searchingCriteria) {
+    	ObservableList<Player> observableList = null;
+    	switch (searchingCriteria) {
+		case "Points":
+			observableList = FXCollections.observableArrayList(dataManagement.getStadisticPPG(filters.getSelectionModel().getSelectedItem(), Double.parseDouble(toSearch.getText())));
+			break;
+		case "Rebounds":
+			observableList = FXCollections.observableArrayList(dataManagement.getStadisticRPG(filters.getSelectionModel().getSelectedItem(), Double.parseDouble(toSearch.getText())));
+			break;
+		case "Assists":
+			observableList = FXCollections.observableArrayList(dataManagement.getStadisticAPG(filters.getSelectionModel().getSelectedItem(), Double.parseDouble(toSearch.getText())));
+			break;
+		case "Robberies":
+			observableList = FXCollections.observableArrayList(dataManagement.getStadisticRBPG(filters.getSelectionModel().getSelectedItem(), Double.parseDouble(toSearch.getText())));
+			break;
+		case "Blocks":
+			observableList = FXCollections.observableArrayList(dataManagement.getStadisticBPG(filters.getSelectionModel().getSelectedItem(), Double.parseDouble(toSearch.getText())));
+			break;
+		default:
+			break;
 		}
-    	observableList = FXCollections.observableArrayList(playersList);
-    	tvSearchedPlayerInformation.setItems(observableList);
-    	tcSearchedPlayerName.setCellValueFactory(new PropertyValueFactory<Player,String>("name"));
-    	tcSearchedPlayerLastName.setCellValueFactory(new PropertyValueFactory<Player,String>("lastName"));
+    	if (observableList == null) {
+			alert(AlertType.INFORMATION, "Searching", "Does not exists coincidences");
+		}
+    	else {
+        	tvSearchedPlayerInformation.setItems(observableList);
+        	tcSearchedPlayerName.setCellValueFactory(new PropertyValueFactory<Player,String>("name"));
+        	tcSearchedPlayerLastName.setCellValueFactory(new PropertyValueFactory<Player,String>("lastName"));
+		}
     }
     
     //--------------------------------------------------------------------------------
