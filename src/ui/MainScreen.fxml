@@ -51,6 +51,7 @@
          <center>
             <TableView fx:id="tvPlayersInfo" prefHeight="576.0" prefWidth="808.0" BorderPane.alignment="CENTER">
               <columns>
+                  <TableColumn fx:id="tcIndex" prefWidth="75.0" text="Index" />
                 <TableColumn fx:id="tcName" prefWidth="111.0" text="Name" />
                 <TableColumn fx:id="tcLastName" prefWidth="101.0" text="Last Name" />
               </columns>

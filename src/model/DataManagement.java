@@ -16,7 +16,7 @@ public class DataManagement {
 	public AVLTree<Double, Integer> reboundsPerGame;
 	public AVLTree<Double, Integer> assistsPerGame;
 	public AVLTree<Double, Integer> robberiesPerGame;
-	public final int size = 1000;
+	public final int size = 200000;
 	
 	public DataManagement() throws IOException {
 		dataTable = new HashTable<>(size);
@@ -24,7 +24,7 @@ public class DataManagement {
 		reboundsPerGame = new AVLTree<>();
 		assistsPerGame = new AVLTree<>();
 		robberiesPerGame = new AVLTree<>();
-		importData("data/dataPrueba.csv");
+		importData("data/data_200k.csv");
 	
 		List<Player> players = getStadisticPPG("Menor", 57);
 		System.out.println(printPlayers(players));
@@ -47,10 +47,10 @@ public class DataManagement {
 			Integer key = new Integer(Integer.parseInt(pData[0])-1);
 			String n = pData[1];
 			String ls = pData[2];
-			String t = "huevos"; //Nombre del equipo.
 			int age = Integer.parseInt(pData[3]);
-			double ppg = Double.parseDouble(pData[4]);
-			double rpg = Double.parseDouble(pData[5]);
+			String t = pData[4];
+			double ppg = Double.parseDouble(pData[5]);
+			double rpg = Double.parseDouble(pData[6]);
 			Player newPlayer = new Player(n, ls, t, age, ppg, rpg);
 			
 			dataTable.addItem(key, newPlayer);
