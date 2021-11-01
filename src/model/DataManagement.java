@@ -53,7 +53,7 @@ public class DataManagement {
 		BufferedReader br = new BufferedReader(new FileReader(filename));
 		br.readLine(); //lee la primera linea con los nombres de las columnas.
 		String line = br.readLine();
-		long timeStart = System.currentTimeMillis();
+//		long timeStart = System.currentTimeMillis();
 		while(line != null) {
 			String[] pData = line.split(",");
 			Integer key = new Integer(Integer.parseInt(pData[0])-1);
@@ -75,8 +75,8 @@ public class DataManagement {
 			robberiesPerGame.insert(rbpg, key);
 			line = br.readLine();
 		}
-		long timeFinal = System.currentTimeMillis();
-		System.out.println("Se demoro en leer: "+ (timeFinal-timeStart));
+//		long timeFinal = System.currentTimeMillis();
+//		System.out.println("Se demoro en leer: "+ (timeFinal-timeStart));
 		br.close();
 	}
 	public void addNewPlayer(String name, String lastN, String team, int age, double ppg, double rpg, double apg, double rbpg, double bpg) {

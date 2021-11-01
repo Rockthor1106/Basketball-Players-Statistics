@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -123,47 +124,47 @@
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                            <center>
-                              <Label fx:id="playerPoints" text="Label" BorderPane.alignment="CENTER">
+                              <TextField fx:id="playerPoints" editable="false" style="-fx-background-color: #F5F4F4;" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
-                              </Label>
+                              </TextField>
                            </center>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <center>
-                              <Label fx:id="playerRebounds" text="Label" BorderPane.alignment="CENTER">
+                              <TextField fx:id="playerRebounds" editable="false" style="-fx-background-color: #F5F4F4;" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
-                              </Label>
+                              </TextField>
+                           </center>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <center>
+                              <TextField fx:id="playerAssists" editable="false" style="-fx-background-color: #F5F4F4;" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </TextField>
                            </center>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <center>
-                              <Label fx:id="playerRobberies" text="Label" BorderPane.alignment="CENTER">
+                              <TextField fx:id="playerRobberies" editable="false" style="-fx-background-color: #F5F4F4;" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
-                              </Label>
+                              </TextField>
                            </center>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <center>
-                              <Label fx:id="playerBlocks" text="Label" BorderPane.alignment="CENTER">
+                              <TextField fx:id="playerBlocks" editable="false" style="-fx-background-color: #F5F4F4;" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
-                              </Label>
-                           </center>
-                        </BorderPane>
-                        <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="2">
-                           <center>
-                              <Label fx:id="playerAssists" text="Label">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Label>
+                              </TextField>
                            </center>
                         </BorderPane>
                      </children>

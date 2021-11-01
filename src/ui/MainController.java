@@ -105,19 +105,19 @@ public class MainController {
     private Label playerName;
 
     @FXML
-    private Label playerPoints;
+    private TextField playerPoints;
 
     @FXML
-    private Label playerRebounds;
+    private TextField playerRebounds;
+    
+    @FXML
+    private TextField playerAssists;
 
     @FXML
-    private Label playerRobberies;
+    private TextField playerRobberies;
 
     @FXML
-    private Label playerBlocks;
-
-    @FXML
-    private Label playerAssists;
+    private TextField playerBlocks;
 
     @FXML
     private Label playerAge;
@@ -197,6 +197,7 @@ public class MainController {
     
     @FXML
     void search(ActionEvent event) throws IOException {
+    	long timeStart = System.currentTimeMillis();
     	String criteria = "";
     	if (searchingCriteria.getSelectionModel().getSelectedItem().equals("Points")) {
     		criteria = "Points";
@@ -213,7 +214,7 @@ public class MainController {
     	else if (searchingCriteria.getSelectionModel().getSelectedItem().equals("Blocks")) {
 			criteria = "Blocks";
 		}
-    	initializeTableViewOfSearchedPlayersInformation(criteria);
+    	initializeTableViewOfSearchedPlayersInformation(criteria, timeStart);
     }
     
     public void initializeComboBoxOfCategories() {
@@ -230,37 +231,46 @@ public class MainController {
     	this.filters.setItems(filters);
     }
     
-    private void initializeTableViewOfSearchedPlayersInformation(String searchingCriteria) throws IOException {
+    private void initializeTableViewOfSearchedPlayersInformation(String searchingCriteria, long timeStart) throws IOException {
     	ObservableList<Player> observableList = null;
     	switch (searchingCriteria) {
 		case "Points":
 			if (filters.getSelectionModel().getSelectedItem().equals("Equals to") && dataManagement.getStadisticPPG(filters.getSelectionModel().getSelectedItem(), Double.parseDouble(toSearch.getText())).size() == 1) {
 				playerInformationScreen(FXCollections.observableArrayList(dataManagement.getStadisticPPG(filters.getSelectionModel().getSelectedItem(), Double.parseDouble(toSearch.getText()))).get(0));
+				long timeFinal = System.currentTimeMillis();
+	        	alert(AlertType.INFORMATION, "Searching Time", "The time required by this searching in miliseconds was " + (timeFinal-timeStart));
 			}
 			observableList = FXCollections.observableArrayList(dataManagement.getStadisticPPG(filters.getSelectionModel().getSelectedItem(), Double.parseDouble(toSearch.getText())));
 			break;
 		case "Rebounds":
-			System.out.println(dataManagement.getStadisticRPG(filters.getSelectionModel().getSelectedItem(), Double.parseDouble(toSearch.getText())).size());
 			if (filters.getSelectionModel().getSelectedItem().equals("Equals to") && dataManagement.getStadisticRPG(filters.getSelectionModel().getSelectedItem(), Double.parseDouble(toSearch.getText())).size() == 1) {
 				playerInformationScreen(FXCollections.observableArrayList(dataManagement.getStadisticRPG(filters.getSelectionModel().getSelectedItem(), Double.parseDouble(toSearch.getText()))).get(0));
+				long timeFinal = System.currentTimeMillis();
+	        	alert(AlertType.INFORMATION, "Searching Time", "The time required by this searching in miliseconds was " + (timeFinal-timeStart));
 			}
 			observableList = FXCollections.observableArrayList(dataManagement.getStadisticRPG(filters.getSelectionModel().getSelectedItem(), Double.parseDouble(toSearch.getText())));
 			break;
 		case "Assists":
 			if (filters.getSelectionModel().getSelectedItem().equals("Equals to") && dataManagement.getStadisticAPG(filters.getSelectionModel().getSelectedItem(), Double.parseDouble(toSearch.getText())).size() == 1) {
 				playerInformationScreen(FXCollections.observableArrayList(dataManagement.getStadisticAPG(filters.getSelectionModel().getSelectedItem(), Double.parseDouble(toSearch.getText()))).get(0));
+				long timeFinal = System.currentTimeMillis();
+	        	alert(AlertType.INFORMATION, "Searching Time", "The time required by this searching in miliseconds was " + (timeFinal-timeStart));
 			}
 			observableList = FXCollections.observableArrayList(dataManagement.getStadisticAPG(filters.getSelectionModel().getSelectedItem(), Double.parseDouble(toSearch.getText())));
 			break;
 		case "Robberies":
 			if (filters.getSelectionModel().getSelectedItem().equals("Equals to") && dataManagement.getStadisticRBPG(filters.getSelectionModel().getSelectedItem(), Double.parseDouble(toSearch.getText())).size() == 1) {
 				playerInformationScreen(FXCollections.observableArrayList(dataManagement.getStadisticRBPG(filters.getSelectionModel().getSelectedItem(), Double.parseDouble(toSearch.getText()))).get(0));
+				long timeFinal = System.currentTimeMillis();
+	        	alert(AlertType.INFORMATION, "Searching Time", "The time required by this searching in miliseconds was " + (timeFinal-timeStart));
 			}
 			observableList = FXCollections.observableArrayList(dataManagement.getStadisticRBPG(filters.getSelectionModel().getSelectedItem(), Double.parseDouble(toSearch.getText())));
 			break;
 		case "Blocks":
 			if (filters.getSelectionModel().getSelectedItem().equals("Equals to") && dataManagement.getStadisticBPG(filters.getSelectionModel().getSelectedItem(), Double.parseDouble(toSearch.getText())).size() == 1) {
 				playerInformationScreen(FXCollections.observableArrayList(dataManagement.getStadisticBPG(filters.getSelectionModel().getSelectedItem(), Double.parseDouble(toSearch.getText()))).get(0));
+				long timeFinal = System.currentTimeMillis();
+	        	alert(AlertType.INFORMATION, "Searching Time", "The time required by this searching in miliseconds was " + (timeFinal-timeStart));
 			}
 			observableList = FXCollections.observableArrayList(dataManagement.getStadisticBPG(filters.getSelectionModel().getSelectedItem(), Double.parseDouble(toSearch.getText())));
 			break;
@@ -269,6 +279,8 @@ public class MainController {
 		}
     	if (observableList == null) {
 			alert(AlertType.INFORMATION, "Searching", "Does not exists coincidences");
+			long timeFinal = System.currentTimeMillis();
+        	alert(AlertType.INFORMATION, "Searching Time", "The time required by this searching in miliseconds was " + (timeFinal-timeStart));
 		}
     	else {
         	tvSearchedPlayerInformation.setItems(observableList);
@@ -281,6 +293,8 @@ public class MainController {
         	tcSearchedPlayerAPG.setCellValueFactory(new PropertyValueFactory<Player,Double>("assistsPerGame"));
         	tcSearchedPlayerRBPG.setCellValueFactory(new PropertyValueFactory<Player,Double>("robberiesPerGame"));
         	tcSearchedPlayerBPG.setCellValueFactory(new PropertyValueFactory<Player,Double>("blocksPerGame"));
+        	long timeFinal = System.currentTimeMillis();
+        	alert(AlertType.INFORMATION, "Searching Time", "The time required by this searching in miliseconds was " + (timeFinal-timeStart));
 		}
     }
     
