@@ -28,6 +28,36 @@ public class Player {
 		blocksPerGame = bpg;
 	}
 
+	public void setKey(int key) {
+		this.key = key;
+	}
+
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+
+
+	public void setTeam(String team) {
+		this.team = team;
+	}
+
+
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+
+
 	public int getKey() {
 		return key;
 	}

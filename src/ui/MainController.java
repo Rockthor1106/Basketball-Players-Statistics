@@ -10,8 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -102,7 +102,7 @@ public class MainController {
     //--------------------------PlayerInformationScreen.fxml--------------------------
     
     @FXML
-    private Label playerName;
+    private TextField playerName;
 
     @FXML
     private TextField playerPoints;
@@ -120,19 +120,83 @@ public class MainController {
     private TextField playerBlocks;
 
     @FXML
-    private Label playerAge;
+    private TextField playerAge;
 
     @FXML
-    private Label playerTeam;
+    private TextField playerTeam;
+    
+    @FXML
+    private Button saveChanguesBtn;
+    
+    @FXML
+    private Button editPlayerDataBtn;
+    
+    private Player playerToEdit = null;
 
     @FXML
     void deletePlayerData(ActionEvent event) {
-
+    	
     }
 
     @FXML
     void editPlayerData(ActionEvent event) {
+    	playerName.setEditable(true);
+    	playerAge.setEditable(true);
+    	playerTeam.setEditable(true);
+    	playerPoints.setEditable(true);
+    	playerRebounds.setEditable(true);
+    	playerAssists.setEditable(true);
+    	playerRobberies.setEditable(true);
+    	playerBlocks.setEditable(true);
+    	alert(AlertType.INFORMATION, "Edit Player Information", "Now you can edit the player information, click on any fields and edit them");
+    	editPlayerDataBtn.setVisible(false);
+    	saveChanguesBtn.setVisible(true);
 
+    }
+    
+    @FXML
+    void saveChanges(ActionEvent event) {
+//    	String[] parts = playerName.getText().split(" ");
+//    	String currentName = parts[0];
+//    	String currentLastName = parts[1];
+//    	String currentTeam = playerTeam.getText();
+//    	int currentAge = Integer.parseInt(playerAge.getText().split(" ")[0]);
+//    	double P = Double.parseDouble(playerPoints.getText());
+//    	double R = Double.parseDouble(playerRebounds.getText()); 
+//    	double A = Double.parseDouble(playerAssists.getText());
+//    	double RB = Double.parseDouble(playerRobberies.getText());  
+//    	double B = Double.parseDouble(playerBlocks.getText());
+    	
+//    	if (!currentName.equals(playerName.getText().split(" ")[0])) {
+			playerToEdit.setName(playerName.getText().split(" ")[0]);
+//		}
+//    	else if (!currentLastName.equals(playerName.getText().split(" ")[1])) {
+    		playerToEdit.setLastName(playerName.getText().split(" ")[1]);
+//		}
+//    	else if (currentAge != Integer.parseInt(playerAge.getText().split(" ")[0])) {
+			playerToEdit.setAge(Integer.parseInt(playerAge.getText().split(" ")[0]));
+//		}
+//    	else if (!currentTeam.equals(playerTeam.getText())) {
+			playerToEdit.setTeam(playerTeam.getText());
+//		}
+//    	else if (P != Double.parseDouble(playerPoints.getText())) {
+			playerToEdit.setPointsPerGame(Double.parseDouble(playerPoints.getText()));
+//		}
+//    	else if (R != Double.parseDouble(playerRebounds.getText())) {
+    		playerToEdit.setReboundsPerGame(Double.parseDouble(playerRebounds.getText()));
+//		}
+//    	else if (A != Double.parseDouble(playerAssists.getText())) {
+    		playerToEdit.setAssistsPerGame(Double.parseDouble(playerAssists.getText()));
+//		}
+//    	else if (RB != Double.parseDouble(playerRobberies.getText())) {
+    		playerToEdit.setRobberiesPerGame(Double.parseDouble(playerRobberies.getText()));
+//		}
+//    	else if (B != Double.parseDouble(playerBlocks.getText())) {
+    		playerToEdit.setBlocksPerGame(Double.parseDouble(playerBlocks.getText()));
+    		
+    		saveChanguesBtn.setVisible(false);
+    		editPlayerDataBtn.setVisible(true);
+//		}
     }
     
     public void playerInformationScreen(Player foundPlayer) throws IOException {
@@ -141,6 +205,7 @@ public class MainController {
 		Parent playerInformationScreen = fxmlLoader.load();
 		mainPane.getChildren().clear();
     	mainPane.setTop(playerInformationScreen);
+    	playerToEdit = foundPlayer;
     	playerName.setText(foundPlayer.getName() + " " + foundPlayer.getLastName());
     	playerAge.setText(String.valueOf(foundPlayer.getAge()) + " Years Old");
     	playerTeam.setText(foundPlayer.getTeam());

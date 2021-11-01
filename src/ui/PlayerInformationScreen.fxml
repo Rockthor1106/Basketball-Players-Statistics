@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -17,12 +18,18 @@
    <top>
       <BorderPane prefHeight="75.0" prefWidth="808.0" BorderPane.alignment="CENTER">
          <center>
-            <Label fx:id="playerName" text="label" BorderPane.alignment="CENTER">
+            <TextField fx:id="playerName" editable="false" style="-fx-background-color: #F5F4F4;" BorderPane.alignment="CENTER">
                <font>
                   <Font name="System Bold" size="40.0" />
                </font>
-            </Label>
+            </TextField>
          </center>
+         <left>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </left>
+         <right>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </right>
       </BorderPane>
    </top>
    <bottom>
@@ -32,22 +39,32 @@
             <Button mnemonicParsing="false" onAction="#deletePlayerData" style="-fx-background-color: #F5F4F4;">
                <graphic>
                   <BorderPane>
-                     <center>
-                        <ImageView fitHeight="58.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
+                     <top>
+                        <ImageView fitHeight="58.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                            <image>
                               <Image url="@../../images/trash-bin.png" />
                            </image>
                         </ImageView>
-                     </center>
+                     </top>
                   </BorderPane>
                </graphic>
             </Button>
-            <BorderPane prefHeight="100.0" prefWidth="64.0" />
-            <Button mnemonicParsing="false" onAction="#editPlayerData" style="-fx-background-color: #F5F4F4;">
+            <Pane prefHeight="100.0" prefWidth="13.0" />
+            <Button fx:id="saveChanguesBtn" mnemonicParsing="false" onAction="#saveChanges" style="-fx-background-color: #F5F4F4;" visible="false">
+               <graphic>
+                  <ImageView fitHeight="55.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/save.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Pane prefHeight="100.0" prefWidth="15.0" />
+            <Button fx:id="editPlayerDataBtn" mnemonicParsing="false" onAction="#editPlayerData" style="-fx-background-color: #F5F4F4;">
                <graphic>
                   <BorderPane>
                      <top>
-                        <ImageView fitHeight="58.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                        <ImageView fitHeight="60.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                            <image>
                               <Image url="@../../images/edit.png" />
                            </image>
@@ -197,12 +214,18 @@
                      <children>
                         <BorderPane prefHeight="200.0" prefWidth="200.0">
                            <center>
-                              <Label fx:id="playerAge" text="Label" BorderPane.alignment="CENTER">
+                              <TextField fx:id="playerAge" alignment="CENTER" editable="false" style="-fx-background-color: #F5F4F4;" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
-                              </Label>
+                              </TextField>
                            </center>
+                           <right>
+                              <BorderPane prefHeight="200.0" prefWidth="38.0" BorderPane.alignment="CENTER" />
+                           </right>
+                           <left>
+                              <BorderPane prefHeight="200.0" prefWidth="129.0" BorderPane.alignment="CENTER" />
+                           </left>
                         </BorderPane>
                         <GridPane prefHeight="37.0" prefWidth="347.0">
                           <columnConstraints>
@@ -214,20 +237,21 @@
                           </rowConstraints>
                            <children>
                               <BorderPane prefHeight="333.0" prefWidth="180.0">
-                                 <center>
+                                 <right>
                                     <Label text="Team" BorderPane.alignment="CENTER">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
                                     </Label>
-                                 </center>
+                                 </right>
                               </BorderPane>
                               <BorderPane prefHeight="164.0" prefWidth="170.0" GridPane.columnIndex="1">
                                  <center>
-                                    <Label fx:id="playerTeam" text="Label" BorderPane.alignment="CENTER">
+                                    <TextField fx:id="playerTeam" editable="false" style="-fx-background-color: #F5F4F4;" BorderPane.alignment="CENTER">
                                        <font>
                                           <Font size="20.0" />
-                                       </font></Label>
+                                       </font>
+                                    </TextField>
                                  </center>
                               </BorderPane>
                            </children>
