@@ -24,9 +24,13 @@ public class DataManagement {
 		reboundsPerGame = new AVLTree<>();
 		assistsPerGame = new AVLTree<>();
 		robberiesPerGame = new AVLTree<>();
-		importData("data/data.csv");
-		
-		List<Player> players = getStadisticPPG("Igual", 50);
+		importData("data/dataPrueba.csv");
+	
+		List<Player> players = getStadisticPPG("Menor", 57);
+		System.out.println(printPlayers(players));
+		players = getStadisticPPG("Igual", 57);
+		System.out.println(printPlayers(players));
+		players = getStadisticPPG("Mayor", 57);
 		System.out.println(printPlayers(players));
 	}
 	
@@ -66,21 +70,131 @@ public class DataManagement {
 	
 	public List<Player> getStadisticPPG(String valueType, double value) {
 		List<Player> players = new ArrayList<>();
-		if(valueType.equalsIgnoreCase("igual")) {
-			List<Integer> pK = pointsPerGame.getEquals(new Double(value));
-			if(pK != null) {
-				for(int i: pK) {
-					players.add(dataTable.getItem(i));
+		switch(valueType) {
+			case "Igual":
+				List<Integer> pKE = pointsPerGame.getEquals(new Double(value));
+				if(pKE != null) {
+					for(int i: pKE) {
+						players.add(dataTable.getItem(i));
+					}
 				}
-			}
+				break;
+			case "Menor":
+				List<Integer> pKL = pointsPerGame.getLess(new Double(value));
+				if(pKL != null) {
+					for(int i: pKL) {
+						players.add(dataTable.getItem(i));
+					}
+				}
+				break;
+			case "Mayor":
+				List<Integer> pKH = pointsPerGame.getHigher(new Double(value));
+				if(pKH != null) {
+					for(int i: pKH) {
+						players.add(dataTable.getItem(i));
+					}
+				}
+				break;
 		}
 		return players;
 	}
-	
+	//FALTA
+	public List<Player> getStadisticRPG(String valueType, double value) {
+		List<Player> players = new ArrayList<>();
+		switch(valueType) {
+			case "Igual":
+				List<Integer> pKE = pointsPerGame.getEquals(new Double(value));
+				if(pKE != null) {
+					for(int i: pKE) {
+						players.add(dataTable.getItem(i));
+					}
+				}
+				break;
+			case "Menor":
+				List<Integer> pKL = pointsPerGame.getLess(new Double(value));
+				if(pKL != null) {
+					for(int i: pKL) {
+						players.add(dataTable.getItem(i));
+					}
+				}
+				break;
+			case "Mayor":
+				List<Integer> pKH = pointsPerGame.getHigher(new Double(value));
+				if(pKH != null) {
+					for(int i: pKH) {
+						players.add(dataTable.getItem(i));
+					}
+				}
+				break;
+		}
+		return players;
+	}
+	//FALTA
+	public List<Player> getStadisticAPG(String valueType, double value) {
+		List<Player> players = new ArrayList<>();
+		switch(valueType) {
+			case "Igual":
+				List<Integer> pKE = pointsPerGame.getEquals(new Double(value));
+				if(pKE != null) {
+					for(int i: pKE) {
+						players.add(dataTable.getItem(i));
+					}
+				}
+				break;
+			case "Menor":
+				List<Integer> pKL = pointsPerGame.getLess(new Double(value));
+				if(pKL != null) {
+					for(int i: pKL) {
+						players.add(dataTable.getItem(i));
+					}
+				}
+				break;
+			case "Mayor":
+				List<Integer> pKH = pointsPerGame.getHigher(new Double(value));
+				if(pKH != null) {
+					for(int i: pKH) {
+						players.add(dataTable.getItem(i));
+					}
+				}
+				break;
+		}
+		return players;
+	}
+	//FALTA
+	public List<Player> getStadisticRBPG(String valueType, double value) {
+		List<Player> players = new ArrayList<>();
+		switch(valueType) {
+			case "Igual":
+				List<Integer> pKE = pointsPerGame.getEquals(new Double(value));
+				if(pKE != null) {
+					for(int i: pKE) {
+						players.add(dataTable.getItem(i));
+					}
+				}
+				break;
+			case "Menor":
+				List<Integer> pKL = pointsPerGame.getLess(new Double(value));
+				if(pKL != null) {
+					for(int i: pKL) {
+						players.add(dataTable.getItem(i));
+					}
+				}
+				break;
+			case "Mayor":
+				List<Integer> pKH = pointsPerGame.getHigher(new Double(value));
+				if(pKH != null) {
+					for(int i: pKH) {
+						players.add(dataTable.getItem(i));
+					}
+				}
+				break;
+		}
+		return players;
+	}
 	public String printPlayers(List<Player> players) {
 		String str = "";
 		for(Player i: players) {
-			str += i.toString();
+			str += i.getPointsPerGame()+" ";
 		}
 		return str;
 	}

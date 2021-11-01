@@ -14,6 +14,9 @@ public class AVLTree <T extends Comparable<T>, K> implements IAVLTree<T, K>{
 	public AVLTree(T r, K k) {
 		root = new AVLTreeNode<T, K>(r, k);
 	}
+	public AVLTreeNode<T, K> getRoot(){
+		return root;
+	}
 	//Revisa si el arbol se encuentra vacio.
 	@Override
 	public boolean isEmpty() {
@@ -27,10 +30,10 @@ public class AVLTree <T extends Comparable<T>, K> implements IAVLTree<T, K>{
 		}else return n.getHeight();
 	}
 	@Override
-	public void changeHeight(AVLTreeNode<T, K> node) {
+	public int changeHeight(AVLTreeNode<T, K> node) {
 		int hL = getHeight(node.getLeft());
 		int hR = getHeight(node.getRight());
-		node.setHeight(((hL>hR)?hL:hR)+1);
+		return ((hL>hR)?hL:hR)+1;
 	}
 	//Obtiene el factor de balance del subarbol n.
 	@Override
@@ -43,79 +46,52 @@ public class AVLTree <T extends Comparable<T>, K> implements IAVLTree<T, K>{
 	@Override
 	public AVLTreeNode<T, K> leftRotate(AVLTreeNode<T, K> node){
 		AVLTreeNode<T, K> temp = node.getRight();
-		
 		node.setRight(temp.getLeft());
-
-		int hL = getHeight(node.getLeft());
-		int hR = getHeight(node.getRight());
-		node.setHeight(((hL>hR)?hL:hR)+1);
-		
+		node.setHeight(changeHeight(node));
 		temp.setLeft(node);
-				
-		hL = getHeight(temp.getLeft());
-		hR = getHeight(temp.getRight());
-		temp.setHeight(((hL>hR)?hL:hR)+1);
-		
+		temp.setHeight(changeHeight(temp));
 		return temp;
 	}
 	//Rotación derecha del subarbol node.
 	@Override
 	public AVLTreeNode<T, K> rightRotate(AVLTreeNode<T, K> node){
 		AVLTreeNode<T, K> temp = node.getLeft();
-		
 		node.setLeft(temp.getRight());
-		
-		int hL = getHeight(node.getLeft());
-		int hR = getHeight(node.getRight());
-		node.setHeight(((hL>hR)?hL:hR)+1);
-		
+		node.setHeight(changeHeight(node));
 		temp.setRight(node);
-		
-		hL = getHeight(temp.getLeft());
-		hR = getHeight(temp.getRight());
-		temp.setHeight(((hL>hR)?hL:hR)+1);
-		
+		temp.setHeight(changeHeight(temp));
 		return temp;
 	}
 	//Insertar un nuevo nodo.
 	@Override
-	public AVLTreeNode<T, K> insert(T element, K key) {
-		if(root == null) {
-			root = new AVLTreeNode<>(element, key);
-			return root;
-		}else return insert(element, key, root);
+	public void insert(T element, K key) {
+		root = insert(element, key, root);
 	}
-	
 	public AVLTreeNode<T, K> insert(T element, K key, AVLTreeNode<T, K> node) {
-		if(node == null) {
-			return (new AVLTreeNode<>(element, key));
-		}
-		if(element.compareTo(node.getData())>=0) {
-			node.setRight(insert(element, key, node.getRight())); 
-		}else {
+		if (node == null) {
+			node = new AVLTreeNode<T, K>(element, key);
+		}else if(element.compareTo(node.getData()) < 0) {
 			node.setLeft(insert(element, key, node.getLeft()));
-		}
-		int hL = getHeight(node.getLeft());
-		int hR = getHeight(node.getRight());
-		node.setHeight(((hL>hR)?hL:hR)+1);
-		
-		int balance = getBalance(node);
-		
-		if(balance > 1) {
-			if(element.compareTo(node.getLeft().getData()) < 0) {
-				return rightRotate(node);
-			}else if(element.compareTo(node.getLeft().getData()) >= 0) {
-				node.setLeft(leftRotate(node.getLeft()));
-				return rightRotate(node);
+			if (getBalance(node) == 2) {
+				if (element.compareTo(node.getLeft().getData()) < 0) {
+					node = rightRotate(node);
+				} else {
+					node.setLeft(leftRotate(node.getLeft()));
+					node = rightRotate(node);
+				}
 			}
-		}else if(balance < -1) {
-			if(element.compareTo(node.getRight().getData()) >= 0) {
-				return leftRotate(node);
-			}else if(element.compareTo(node.getRight().getData()) < 0) {
-				node.setRight(rightRotate(node.getRight()));
-				return leftRotate(node);
+		} else if (element.compareTo(node.getData()) >= 0) {
+			node.setRight(insert(element, key, node.getRight()));
+			if (getBalance(node) == -2) {
+				if (element.compareTo(node.getRight().getData()) >= 0) {
+					node = leftRotate(node);
+				} else {
+					node.setRight(rightRotate(node.getRight()));
+					node = leftRotate(node);
+				}
 			}
 		}
+		node.setHeight(changeHeight(node));
 		return node;
 	}
 	//Eliminar un nodo.
@@ -125,7 +101,6 @@ public class AVLTree <T extends Comparable<T>, K> implements IAVLTree<T, K>{
 			return root;
 		}else return delete(element, root);
 	}
-	
 	public AVLTreeNode<T, K> delete(T element, AVLTreeNode<T, K> node){
 		if(element.compareTo(node.getData()) > 0) {
 			node.setLeft(delete(element, node.getRight()));
@@ -149,7 +124,7 @@ public class AVLTree <T extends Comparable<T>, K> implements IAVLTree<T, K>{
 				node.setData(temp.getData());
 				node.setRight(delete(temp.getData(), node.getRight()));
 			}
-			changeHeight(node);
+			node.setHeight(changeHeight(node));
 			int balance = getBalance(node);
 			
 			if(balance > 1) {
@@ -171,6 +146,9 @@ public class AVLTree <T extends Comparable<T>, K> implements IAVLTree<T, K>{
 		return node;
 	}
 	//Obtener el valor minimo.
+	public AVLTreeNode<T, K> getMin(){
+		return getMin(root);
+	}
 	@Override
 	public AVLTreeNode<T, K> getMin(AVLTreeNode<T, K> root){
 		while(root.getLeft() != null) {
@@ -179,6 +157,9 @@ public class AVLTree <T extends Comparable<T>, K> implements IAVLTree<T, K>{
 		return root;
 	}
 	//Obtener el valor máximo.
+	public AVLTreeNode<T, K> getMax(){
+		return getMax(root);
+	}
 	@Override
 	public AVLTreeNode<T, K> getMax(AVLTreeNode<T, K> root){
 		while(root.getRight() != null) {
@@ -217,10 +198,107 @@ public class AVLTree <T extends Comparable<T>, K> implements IAVLTree<T, K>{
 		}
 		return players;
 	}
-	public List<K> getLess(){
-		return null;
+	
+	public List<K> getLess(T value){
+		if(!isEmpty()) {
+			return getLess(value, root);
+		}else return null;
 	}
-	public List<K> getHigher(){
-		return null;
+	public List<K> getLess(T value, AVLTreeNode<T, K> node){
+		List<K> players = new ArrayList<K>();
+		while(node.getData().compareTo(value) >= 0 && node != null){
+			node = node.getLeft();
+		}
+		players.add(node.getKey());
+		players.addAll(getLess(node.getLeft()));
+		players.addAll(getLess(node.getRight(), value));
+		return players;
+	}
+	public List<K> getLess(AVLTreeNode<T, K> node){
+		if(node == null) {
+			return null;
+		}else {
+			List<K> pK = new ArrayList<>();
+			pK.add(node.getKey());
+			if(node.getLeft() != null)
+				pK.addAll(getLess(node.getLeft()));
+			if(node.getRight() != null)
+				pK.addAll(getLess(node.getRight()));
+			return pK;
+		}
+	}
+	public List<K> getLess(AVLTreeNode<T, K> node, T value){
+		if(node == null) {
+			return null;
+		}else {
+			List<K> pK =  new ArrayList<>();
+			if(node.getLeft() != null) {
+				pK.addAll(getLess(node.getLeft(), value));
+			}
+			if(node.getData().compareTo(value) < 0)
+				pK.add(node.getKey());
+			if(node.getRight() != null) {
+				pK.addAll(getLess(node.getRight(), value));
+			}
+			return pK;
+		}
+	}
+	
+	public List<K> getHigher(T value){
+		if(!isEmpty()) {
+			return getHigher(value, root);
+		}else return null;
+	}
+	public List<K> getHigher(T value, AVLTreeNode<T,K> node){
+		List<K> players = new ArrayList<K>();
+		while(node.getData().compareTo(value) <= 0 && node != null) {
+			node = node.getRight();
+		}
+		players.add(node.getKey());
+		players.addAll(getHigher(node.getRight()));
+		players.addAll(getHigher(node.getLeft(), value));
+		return players;
+	}
+	public List<K> getHigher(AVLTreeNode<T, K> node) {
+		if(root == null) {
+			return null;
+		}else {
+			List<K> pK = new ArrayList<>();
+			pK.add(node.getKey());
+			if(node.getLeft() != null) {
+				pK.addAll(getLess(node.getLeft()));
+			}
+			if(node.getRight() != null) {
+				pK.addAll(getLess(node.getRight()));
+			}
+			return pK;
+		}
+	}
+	public List<K> getHigher(AVLTreeNode<T, K> node, T value){
+		if(node == null) {
+			return null;
+		}else {
+			List<K> pK = new ArrayList<K>();
+			if(node.getLeft() != null) {
+				pK.addAll(getHigher(node.getLeft(), value));
+			}
+			if(node.getData().compareTo(value) > 0)
+				pK.add(node.getKey());
+			if(node.getRight() != null) {
+				pK.addAll(getHigher(node.getRight(), value));
+			}
+			return pK;
+		}
+	}
+	
+	public String preOrder(AVLTreeNode<T, K> node) {
+		if(node == null) {
+			return "";
+		}
+		String str = "";
+		str += " "+node.getData();
+		str += preOrder(node.getLeft());
+		str += preOrder(node.getRight());
+		return str;
 	}
 }
