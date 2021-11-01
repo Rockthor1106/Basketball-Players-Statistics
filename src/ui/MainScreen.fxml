@@ -54,9 +54,10 @@
                <center>
                   <TableView fx:id="tvPlayersInfo" prefHeight="576.0" prefWidth="808.0">
                     <columns>
-                        <TableColumn fx:id="tcIndex" prefWidth="75.0" text="Index" />
-                      <TableColumn fx:id="tcName" prefWidth="111.0" text="Name" />
-                      <TableColumn fx:id="tcLastName" prefWidth="101.0" text="Last Name" />
+                      <TableColumn fx:id="tcName" prefWidth="192.0" text="Name" />
+                      <TableColumn fx:id="tcLastName" prefWidth="178.0" text="Last Name" />
+                        <TableColumn fx:id="tcAge" prefWidth="139.0" text="Age" />
+                        <TableColumn fx:id="tcTeam" prefWidth="278.0" text="Team" />
                     </columns>
                   </TableView>
                </center>

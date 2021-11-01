@@ -55,13 +55,16 @@ public class MainController {
     private TableView<Player> tvPlayersInfo;
     
     @FXML
-    private TableColumn<Player, Integer> tcIndex;
-    
-    @FXML
     private TableColumn<Player, String> tcName;
 
     @FXML
     private TableColumn<Player, String> tcLastName;
+    
+    @FXML
+    private TableColumn<Player, Integer> tcAge;
+    
+    @FXML
+    private TableColumn<Player, String> tcTeam;
     
     @FXML
     void displayCredits(ActionEvent event) {
@@ -78,6 +81,8 @@ public class MainController {
     	tvPlayersInfo.setItems(observableList);
     	tcName.setCellValueFactory(new PropertyValueFactory<Player,String>("name"));
     	tcLastName.setCellValueFactory(new PropertyValueFactory<Player,String>("lastName"));
+    	tcAge.setCellValueFactory(new PropertyValueFactory<Player,Integer>("age"));
+    	tcTeam.setCellValueFactory(new PropertyValueFactory<Player,String>("team"));
     }
     
     @FXML
