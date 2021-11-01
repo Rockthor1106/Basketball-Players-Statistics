@@ -174,7 +174,7 @@
                      <center>
                         <Label text="Statistics Data Per Game" BorderPane.alignment="CENTER">
                            <font>
-                              <Font size="20.0" />
+                              <Font name="System Bold Italic" size="20.0" />
                            </font>
                         </Label>
                      </center>
