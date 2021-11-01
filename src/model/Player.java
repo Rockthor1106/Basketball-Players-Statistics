@@ -1,6 +1,8 @@
 package model;
 
 public class Player {
+	
+	private int key;
 	private String name;
 	private String lastName;
 	private String team;
@@ -13,7 +15,8 @@ public class Player {
 	private double robberiesPerGame;
 	private double blocksPerGame;
 	
-	public Player(String n, String ls, String t, int a, double ppg, double rpg, double apg, double rbpg, double bpg) {
+	public Player(int k, String n, String ls, String t, int a, double ppg, double rpg, double apg, double rbpg, double bpg) {
+		key = k;
 		name = n;
 		lastName = ls;
 		team = t;
@@ -25,6 +28,9 @@ public class Player {
 		blocksPerGame = bpg;
 	}
 
+	public int getKey() {
+		return key;
+	}
 	public String getName() {
 		return name;
 	}

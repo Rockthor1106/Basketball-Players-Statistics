@@ -21,27 +21,33 @@ public class HashTable<K, V> implements IHashTable<K,V>{
 	@Override
 	public int addItem(K key, V item) {
 		int index = (int) key;
-		if(table.get(index) == null) {
-			table.set(index, item);
-		}else {
-			boolean full = false;
-			while(table.get(index) != null && !full) {
-				if(index< size-1) {
-					index++;
-				}else {
-					index = 0;
-				}
-				if(index == (int) key) {
-					full = true;
-				}
-			}
-			if(!full) {
-				table.set(index, item);				
+		if(index < size){
+			if(table.get(index) == null) {
+				table.set(index, item);
 			}else {
-				size++;
-				table.add(size, item);
+				boolean full = false;
+				while(table.get(index) != null && !full) {
+					if(index< size-1) {
+						index++;
+					}else {
+						index = 0;
+					}
+					if(index == (int) key) {
+						full = true;
+					}
+				}
+				if(!full) {
+					table.set(index, item);				
+				}else {
+					size++;
+					table.add(size, item);
+				}
 			}
+		}else {
+			size++;
+			table.add(index, item);
 		}
+		
 		return index;
 	}
 	@Override
