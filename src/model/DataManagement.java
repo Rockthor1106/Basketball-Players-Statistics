@@ -55,7 +55,7 @@ public class DataManagement {
 			
 			dataTable.addItem(key, newPlayer);
 			pointsPerGame.insert(ppg, key);
-			
+			reboundsPerGame.insert(rpg, key);
 			line = br.readLine();
 		}
 		br.close();
@@ -67,7 +67,7 @@ public class DataManagement {
 		}
 		return players;
 	}
-	
+	//BUSCAR LISTA DE JUGADORES POR 'PUNTOS POR JUEGO'
 	public List<Player> getStadisticPPG(String valueType, double value) {
 		List<Player> players = new ArrayList<>();
 		switch(valueType) {
@@ -98,7 +98,7 @@ public class DataManagement {
 		}
 		return players;
 	}
-	//FALTA
+	//FALTA. BUSCAR LISTA DE JUGADORES POR 'REBOTES POR JUEGO'
 	public List<Player> getStadisticRPG(String valueType, double value) {
 		List<Player> players = new ArrayList<>();
 		switch(valueType) {
@@ -129,7 +129,7 @@ public class DataManagement {
 		}
 		return players;
 	}
-	//FALTA
+	//FALTA. BUSCAR LISTA DE JUGADORES POR 'ASISTENCIAS POR JUEGO'
 	public List<Player> getStadisticAPG(String valueType, double value) {
 		List<Player> players = new ArrayList<>();
 		switch(valueType) {
@@ -160,7 +160,7 @@ public class DataManagement {
 		}
 		return players;
 	}
-	//FALTA
+	//FALTA. BUSCAR LISTA DE JUGADORES POR 'ROBOS POR JUEGO'
 	public List<Player> getStadisticRBPG(String valueType, double value) {
 		List<Player> players = new ArrayList<>();
 		switch(valueType) {
