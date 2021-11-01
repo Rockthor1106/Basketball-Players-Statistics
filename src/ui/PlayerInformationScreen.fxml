@@ -18,7 +18,7 @@
          <center>
             <Label fx:id="playerName" text="label" BorderPane.alignment="CENTER">
                <font>
-                  <Font name="System Bold" size="25.0" />
+                  <Font name="System Bold" size="40.0" />
                </font>
             </Label>
          </center>
@@ -80,7 +80,7 @@
                            <center>
                               <Label text="Points" BorderPane.alignment="CENTER">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Label>
                            </center>
@@ -89,7 +89,7 @@
                            <center>
                               <Label text="Rebounds" BorderPane.alignment="CENTER">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Label>
                            </center>
@@ -98,7 +98,7 @@
                            <center>
                               <Label text="Assists" BorderPane.alignment="CENTER">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Label>
                            </center>
@@ -107,7 +107,7 @@
                            <center>
                               <Label text="Robberies" BorderPane.alignment="CENTER">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Label>
                            </center>
@@ -116,7 +116,7 @@
                            <center>
                               <Label text="Blocks" BorderPane.alignment="CENTER">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Label>
                            </center>
@@ -125,7 +125,7 @@
                            <center>
                               <Label fx:id="playerPoints" text="Label" BorderPane.alignment="CENTER">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Label>
                            </center>
@@ -134,7 +134,7 @@
                            <center>
                               <Label fx:id="playerRebounds" text="Label" BorderPane.alignment="CENTER">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Label>
                            </center>
@@ -143,7 +143,7 @@
                            <center>
                               <Label fx:id="playerRobberies" text="Label" BorderPane.alignment="CENTER">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Label>
                            </center>
@@ -152,7 +152,7 @@
                            <center>
                               <Label fx:id="playerBlocks" text="Label" BorderPane.alignment="CENTER">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Label>
                            </center>
@@ -161,7 +161,7 @@
                            <center>
                               <Label fx:id="playerAssists" text="Label">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Label>
                            </center>
@@ -174,7 +174,7 @@
                      <center>
                         <Label text="Statistics Data Per Game" BorderPane.alignment="CENTER">
                            <font>
-                              <Font size="19.0" />
+                              <Font size="20.0" />
                            </font>
                         </Label>
                      </center>
@@ -198,7 +198,7 @@
                            <center>
                               <Label fx:id="playerAge" text="Label" BorderPane.alignment="CENTER">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </Label>
                            </center>
@@ -216,14 +216,17 @@
                                  <center>
                                     <Label text="Team" BorderPane.alignment="CENTER">
                                        <font>
-                                          <Font size="14.0" />
+                                          <Font size="20.0" />
                                        </font>
                                     </Label>
                                  </center>
                               </BorderPane>
                               <BorderPane prefHeight="164.0" prefWidth="170.0" GridPane.columnIndex="1">
                                  <center>
-                                    <Label fx:id="playerTeam" text="Label" BorderPane.alignment="CENTER" />
+                                    <Label fx:id="playerTeam" text="Label" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font></Label>
                                  </center>
                               </BorderPane>
                            </children>

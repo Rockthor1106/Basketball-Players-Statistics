@@ -135,13 +135,22 @@ public class MainController {
 
     }
     
-    public void playerInformationScreen() throws IOException {
+    public void playerInformationScreen(Player foundPlayer) throws IOException {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PlayerInformationScreen.fxml"));
 		fxmlLoader.setController(this);    	
 		Parent playerInformationScreen = fxmlLoader.load();
 		mainPane.getChildren().clear();
     	mainPane.setTop(playerInformationScreen);
+    	playerName.setText(foundPlayer.getName() + " " + foundPlayer.getLastName());
+    	playerAge.setText(String.valueOf(foundPlayer.getAge()) + " Years Old");
+    	playerTeam.setText(foundPlayer.getTeam());
+    	playerPoints.setText(String.valueOf(foundPlayer.getPointsPerGame()));
+    	playerRebounds.setText(String.valueOf(foundPlayer.getReboundsPerGame()));
+    	playerAssists.setText(String.valueOf(foundPlayer.getAssistsPerGame()));
+    	playerRobberies.setText(String.valueOf(foundPlayer.getRobberiesPerGame()));
+    	playerBlocks.setText(String.valueOf(foundPlayer.getBlocksPerGame()));
     }
+    
     
     //--------------------------------------------------------------------------------
     
@@ -221,10 +230,13 @@ public class MainController {
     	this.filters.setItems(filters);
     }
     
-    private void initializeTableViewOfSearchedPlayersInformation(String searchingCriteria) {
+    private void initializeTableViewOfSearchedPlayersInformation(String searchingCriteria) throws IOException {
     	ObservableList<Player> observableList = null;
     	switch (searchingCriteria) {
 		case "Points":
+			if (filters.getSelectionModel().getSelectedItem().equals("Equals to")) {
+				playerInformationScreen(FXCollections.observableArrayList(dataManagement.getStadisticPPG(filters.getSelectionModel().getSelectedItem(), Double.parseDouble(toSearch.getText()))).get(0));
+			}
 			observableList = FXCollections.observableArrayList(dataManagement.getStadisticPPG(filters.getSelectionModel().getSelectedItem(), Double.parseDouble(toSearch.getText())));
 			break;
 		case "Rebounds":
