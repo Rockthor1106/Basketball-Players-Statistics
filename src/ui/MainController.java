@@ -42,7 +42,10 @@ public class MainController {
     
     @FXML
     private TableView<Player> tvPlayersInfo;
-
+    
+    @FXML
+    private TableColumn<Player, Integer> tcIndex;
+    
     @FXML
     private TableColumn<Player, String> tcName;
 
