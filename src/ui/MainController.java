@@ -8,8 +8,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import model.DataManagement;
@@ -35,7 +37,7 @@ public class MainController {
     	alert.show();
     }
 	
-	//--------------------------------MainScreen.FXML---------------------------------
+	//--------------------------------MainScreen.fxml---------------------------------
 	
     @FXML
     private BorderPane mainPane;
@@ -71,4 +73,55 @@ public class MainController {
     
     
     //--------------------------------------------------------------------------------
+    
+    //--------------------------PlayerInformationScreen.fxml--------------------------
+    
+    @FXML
+    private BorderPane playerName;
+
+    @FXML
+    private Label playerPoints;
+
+    @FXML
+    private Label playerRebounds;
+
+    @FXML
+    private Label playerRobberies;
+
+    @FXML
+    private Label playerBlocks;
+
+    @FXML
+    private Label playerAssists;
+
+    @FXML
+    private Label playerAge;
+
+    @FXML
+    private Label playerTeam;
+
+    @FXML
+    void deletePlayerData(ActionEvent event) {
+
+    }
+
+    @FXML
+    void editPlayerData(ActionEvent event) {
+
+    }
+    
+    //--------------------------------------------------------------------------------
+    
+    //------------------------------SearchingScreen.fxml------------------------------
+    
+    @FXML
+    private TextField toSearch;
+
+    @FXML
+    void search(ActionEvent event) {
+
+    }
+    
+    //--------------------------------------------------------------------------------
+    
 }
