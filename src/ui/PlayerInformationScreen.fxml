@@ -14,9 +14,9 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="808.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <BorderPane fx:id="playerName" prefHeight="75.0" prefWidth="808.0" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="75.0" prefWidth="808.0" BorderPane.alignment="CENTER">
          <center>
-            <Label text="label" BorderPane.alignment="CENTER">
+            <Label fx:id="playerName" text="label" BorderPane.alignment="CENTER">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
@@ -42,7 +42,7 @@
                </graphic>
             </Button>
             <BorderPane prefHeight="100.0" prefWidth="64.0" />
-            <Button mnemonicParsing="false" onAction="#editPlayerData" style="-fx-background-color: #F5F4F4;">
+            <Button fx:id="editPlayerData" mnemonicParsing="false" style="-fx-background-color: #F5F4F4;">
                <graphic>
                   <BorderPane>
                      <top>

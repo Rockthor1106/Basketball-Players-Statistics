@@ -1,13 +1,21 @@
 package ui;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import org.omg.CORBA.TCKind;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -16,6 +24,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import model.DataManagement;
 import model.Player;
+import model.SearchingCriteria;
 
 public class MainController {
 	
@@ -71,13 +80,29 @@ public class MainController {
     	tcLastName.setCellValueFactory(new PropertyValueFactory<Player,String>("lastName"));
     }
     
+    @FXML
+    void searchingScreen(ActionEvent event) throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SearchingScreen.fxml"));
+		fxmlLoader.setController(this);    	
+		Parent searchingScreen = fxmlLoader.load();
+    	initializeComboBoxOfCategories();
+    	initializeComboBoxOfFilters();
+		mainPane.getChildren().clear();
+    	mainPane.setTop(searchingScreen);
+    }
+    
+    @FXML
+    void home(ActionEvent event) throws IOException {
+		mainPane.getChildren().clear();
+    	mainPane.setTop(tvPlayersInfo);
+    }
     
     //--------------------------------------------------------------------------------
     
     //--------------------------PlayerInformationScreen.fxml--------------------------
     
     @FXML
-    private BorderPane playerName;
+    private Label playerName;
 
     @FXML
     private Label playerPoints;
@@ -110,16 +135,72 @@ public class MainController {
 
     }
     
+    public void playerInformationScreen() throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PlayerInformationScreen.fxml"));
+		fxmlLoader.setController(this);    	
+		Parent playerInformationScreen = fxmlLoader.load();
+		mainPane.getChildren().clear();
+    	mainPane.setTop(playerInformationScreen);
+    }
+    
     //--------------------------------------------------------------------------------
     
     //------------------------------SearchingScreen.fxml------------------------------
     
     @FXML
     private TextField toSearch;
+    
 
     @FXML
-    void search(ActionEvent event) {
+    private ComboBox<String> searchingCriteria;
 
+    @FXML
+    private ComboBox<String> filters;
+    
+    @FXML
+    private TableView<Player> tvSearchedPlayerInformation;
+
+    @FXML
+    private TableColumn<Player, String> tcSearchedPlayerName;
+
+    @FXML
+    private TableColumn<Player, String> tcSearchedPlayerLastName;
+
+
+    @FXML
+    void search(ActionEvent event) throws IOException {
+    	if (filters.getSelectionModel().getSelectedItem().equals("Equals to")) {
+			playerInformationScreen();
+		}
+    	initializeTableViewOfSearchedPlayersInformation();
+    	
+    
+    }
+    
+    public void initializeComboBoxOfCategories() {
+    	ObservableList<String> criteria = FXCollections.observableArrayList(SearchingCriteria.values()[0].name(),
+    																		SearchingCriteria.values()[1].name(),
+															    			SearchingCriteria.values()[2].name(),
+															    			SearchingCriteria.values()[3].name(),
+															    			SearchingCriteria.values()[4].name());
+    	this.searchingCriteria.setItems(criteria);
+    }
+    
+    public void initializeComboBoxOfFilters() {
+    	ObservableList<String> filters = FXCollections.observableArrayList("Greater than", "Equals to", "Less than");
+    	this.filters.setItems(filters);
+    }
+    
+    private void initializeTableViewOfSearchedPlayersInformation() {
+    	ObservableList<Player> observableList;
+    	ArrayList<Player> playersList = new ArrayList<>();
+    	for (int i = 0; i < dataManagement.getStadisticPPG(filters.getSelectionModel().getSelectedItem(), Double.parseDouble(toSearch.getText())).size(); i++) {
+			playersList.add(i, dataManagement.getStadisticPPG(filters.getSelectionModel().getSelectedItem(), Double.parseDouble(toSearch.getText())).get(i));
+		}
+    	observableList = FXCollections.observableArrayList(playersList);
+    	tvSearchedPlayerInformation.setItems(observableList);
+    	tcSearchedPlayerName.setCellValueFactory(new PropertyValueFactory<Player,String>("name"));
+    	tcSearchedPlayerLastName.setCellValueFactory(new PropertyValueFactory<Player,String>("lastName"));
     }
     
     //--------------------------------------------------------------------------------

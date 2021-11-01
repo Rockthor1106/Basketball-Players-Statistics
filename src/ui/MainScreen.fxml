@@ -11,7 +11,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="878.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <BorderPane fx:id="mainPane" prefHeight="102.0" prefWidth="878.0" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="102.0" prefWidth="878.0" BorderPane.alignment="CENTER">
          <center>
             <Label text="Basketball Players Statistics" BorderPane.alignment="CENTER">
                <font>
@@ -20,11 +20,12 @@
             </Label>
          </center>
          <bottom>
-            <MenuBar cache="true" BorderPane.alignment="CENTER">
+            <MenuBar cache="true" prefHeight="21.0" prefWidth="878.0" BorderPane.alignment="CENTER">
               <menus>
                 <Menu mnemonicParsing="false" text="Options">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Search Player" />
+                    <MenuItem mnemonicParsing="false" onAction="#searchingScreen" text="Search Player" />
+                        <MenuItem mnemonicParsing="false" onAction="#home" text="Home" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
@@ -49,13 +50,17 @@
             <BorderPane prefHeight="32.0" prefWidth="878.0" BorderPane.alignment="CENTER" />
          </top>
          <center>
-            <TableView fx:id="tvPlayersInfo" prefHeight="576.0" prefWidth="808.0" BorderPane.alignment="CENTER">
-              <columns>
-                  <TableColumn fx:id="tcIndex" prefWidth="75.0" text="Index" />
-                <TableColumn fx:id="tcName" prefWidth="111.0" text="Name" />
-                <TableColumn fx:id="tcLastName" prefWidth="101.0" text="Last Name" />
-              </columns>
-            </TableView>
+            <BorderPane fx:id="mainPane" BorderPane.alignment="CENTER">
+               <center>
+                  <TableView fx:id="tvPlayersInfo" prefHeight="576.0" prefWidth="808.0">
+                    <columns>
+                        <TableColumn fx:id="tcIndex" prefWidth="75.0" text="Index" />
+                      <TableColumn fx:id="tcName" prefWidth="111.0" text="Name" />
+                      <TableColumn fx:id="tcLastName" prefWidth="101.0" text="Last Name" />
+                    </columns>
+                  </TableView>
+               </center>
+            </BorderPane>
          </center>
       </BorderPane>
    </center>
