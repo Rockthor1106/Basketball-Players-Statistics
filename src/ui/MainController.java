@@ -47,18 +47,6 @@ public class MainController {
 			
 		});
 		
-		tvSearchedPlayerInformation.setOnMousePressed(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-				try {
-					playerInformationScreen(tvSearchedPlayerInformation.getSelectionModel().getSelectedItem());
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			
-		});
 	}
 	
     public void alert(AlertType alertType, String alertTitle, String Alertmsg) {
@@ -117,6 +105,19 @@ public class MainController {
     	initializeComboBoxOfFilters();
 		mainPane.getChildren().clear();
     	mainPane.setTop(searchingScreen);
+    	
+		tvSearchedPlayerInformation.setOnMousePressed(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent event) {
+				try {
+					playerInformationScreen(tvSearchedPlayerInformation.getSelectionModel().getSelectedItem());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+		});
     }
     
     @FXML
