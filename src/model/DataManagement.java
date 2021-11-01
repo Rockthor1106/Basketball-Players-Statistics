@@ -51,7 +51,7 @@ public class DataManagement {
 			double apg = Double.parseDouble(pData[7]);
 			double rbpg = Double.parseDouble(pData[8]);
 			double bpg = Double.parseDouble(pData[9]);
-			Player newPlayer = new Player(name, lastN, team, age, ppg, rpg, apg, rbpg, bpg);
+			Player newPlayer = new Player(key,name, lastN, team, age, ppg, rpg, apg, rbpg, bpg);
 			
 			dataTable.addItem(key, newPlayer);
 			pointsPerGame.insert(ppg, key);
@@ -223,7 +223,86 @@ public class DataManagement {
 		}
 		return players;
 	}
- 	public String printPlayers(List<Player> players) {
+ 	public List<Player> getDataWithTwoCriteria(String criterionF, String vTypeF, double valueF, String criterionS, String vTypeS, double valueS){
+ 		List<Player> players = new ArrayList<>();
+ 		switch(criterionF) {
+ 			case "Points Per Game":
+ 				players = getStadisticPPG(vTypeF, valueF);
+ 				break;
+ 			case "Rebounds Per Game":
+ 				players = getStadisticRPG(vTypeF, valueF);
+ 				break;
+ 			case "Assists Per Game":
+ 				players = getStadisticAPG(vTypeF, valueF);
+ 				break;
+ 			case "Robberies Per Game":
+ 				players = getStadisticRBPG(vTypeF, valueF);
+ 				break;
+ 			case "Blocks Per Game":
+ 				players = getStadisticBPG(vTypeF, valueF);
+ 				break;
+ 		}
+ 		AVLTree<Double, Integer> order = subTree(players, criterionS);
+ 		List<Player> solution = new ArrayList<>();
+ 		switch(vTypeS) {
+ 			case "Igual":
+ 				List<Integer> pKE = order.getEquals(valueS);
+				if(pKE != null) {
+					for(int i: pKE) {
+						solution.add(dataTable.getItem(i));
+					}
+				}
+ 				break;
+ 			case "Menor":
+ 				List<Integer> pKL = order.getLess(valueS);
+ 				if(pKL != null) {
+					for(int i: pKL) {
+						solution.add(dataTable.getItem(i));
+					}
+				}
+ 				break;
+ 			case "Mayor":
+ 				List<Integer> pKH = order.getHigher(valueS);
+ 				if(pKH != null) {
+					for(int i: pKH) {
+						solution.add(dataTable.getItem(i));
+					}
+				}
+ 				break;
+ 		}
+ 		return solution;
+ 	}
+ 	//Ordenar por medio del segundo criterio.
+	public AVLTree<Double, Integer> subTree(List<Player> players, String type) {
+		if(!players.isEmpty()) {
+			AVLTree<Double, Integer> temp = new AVLTree<>();
+			switch(type) {
+			case "Points Per Game":
+				for(Player i: players) {
+					temp.insert(i.getPointsPerGame(), i.getKey());
+				}
+			case "Rebounds Per Game":
+				for(Player i: players) {
+					temp.insert(i.getReboundsPerGame(), i.getKey());
+				}
+			case "Assists Per Game":
+				for(Player i: players) {
+					temp.insert(i.getAssistsPerGame(), i.getKey());
+				}
+			case "Robberies Per Game":
+				for(Player i: players) {
+					temp.insert(i.getRobberiesPerGame(), i.getKey());
+				}
+			case "Blocks Per Game":
+				for(Player i: players) {
+					temp.insert(i.getBlocksPerGame(), i.getKey());
+				}
+			}
+			return temp;
+		}else return null;
+	}
+	
+	public String printPlayers(List<Player> players) {
 		String str = "";
 		for(Player i: players) {
 			str += i.getPointsPerGame()+" ";
