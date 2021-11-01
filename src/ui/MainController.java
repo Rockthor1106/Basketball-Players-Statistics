@@ -169,11 +169,28 @@ public class MainController {
 
     @FXML
     private TableColumn<Player, String> tcSearchedPlayerLastName;
-    
+
     @FXML
-    private BorderPane secondaryPane;
+    private TableColumn<Player, Integer> tcSearchedPlayerAge;
 
+    @FXML
+    private TableColumn<Player, String> tcSearchedPlayerTeam;
 
+    @FXML
+    private TableColumn<Player, Double> tcSearchedPlayerPPG;
+
+    @FXML
+    private TableColumn<Player, Double> tcSearchedPlayerRPG;
+
+    @FXML
+    private TableColumn<Player, Double> tcSearchedPlayerAPG;
+
+    @FXML
+    private TableColumn<Player, Double> tcSearchedPlayerRBPG;
+
+    @FXML
+    private TableColumn<Player, Double> tcSearchedPlayerBPG;
+    
     @FXML
     void search(ActionEvent event) throws IOException {
     	String criteria = "";
@@ -237,6 +254,13 @@ public class MainController {
         	tvSearchedPlayerInformation.setItems(observableList);
         	tcSearchedPlayerName.setCellValueFactory(new PropertyValueFactory<Player,String>("name"));
         	tcSearchedPlayerLastName.setCellValueFactory(new PropertyValueFactory<Player,String>("lastName"));
+        	tcSearchedPlayerAge.setCellValueFactory(new PropertyValueFactory<Player,Integer>("age"));
+        	tcSearchedPlayerTeam.setCellValueFactory(new PropertyValueFactory<Player,String>("team"));
+        	tcSearchedPlayerPPG.setCellValueFactory(new PropertyValueFactory<Player,Double>("pointsPerGame"));
+        	tcSearchedPlayerRPG.setCellValueFactory(new PropertyValueFactory<Player,Double>("reboundsPerGame"));
+        	tcSearchedPlayerAPG.setCellValueFactory(new PropertyValueFactory<Player,Double>("assistsPerGame"));
+        	tcSearchedPlayerRBPG.setCellValueFactory(new PropertyValueFactory<Player,Double>("robberiesPerGame"));
+        	tcSearchedPlayerBPG.setCellValueFactory(new PropertyValueFactory<Player,Double>("blocksPerGame"));
 		}
     }
     

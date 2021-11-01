@@ -48,12 +48,19 @@
       </HBox>
    </top>
    <center>
-      <BorderPane fx:id="secondaryPane" BorderPane.alignment="CENTER">
+      <BorderPane BorderPane.alignment="CENTER">
          <center>
             <TableView fx:id="tvSearchedPlayerInformation" prefHeight="200.0" prefWidth="200.0">
               <columns>
-                <TableColumn fx:id="tcSearchedPlayerName" prefWidth="75.0" text="Name" />
-                <TableColumn fx:id="tcSearchedPlayerLastName" prefWidth="75.0" text="Last name" />
+                <TableColumn fx:id="tcSearchedPlayerName" prefWidth="95.0" text="Name" />
+                <TableColumn fx:id="tcSearchedPlayerLastName" prefWidth="101.0" text="Last name" />
+                  <TableColumn fx:id="tcSearchedPlayerAge" prefWidth="58.0" text="Age" />
+                  <TableColumn fx:id="tcSearchedPlayerTeam" prefWidth="193.0" text="Team" />
+                  <TableColumn fx:id="tcSearchedPlayerPPG" prefWidth="75.0" text="PPG" />
+                  <TableColumn fx:id="tcSearchedPlayerRPG" prefWidth="62.0" text="RPG" />
+                  <TableColumn fx:id="tcSearchedPlayerAPG" prefWidth="76.0" text="APG" />
+                  <TableColumn fx:id="tcSearchedPlayerRBPG" prefWidth="76.0" text="RBPG" />
+                  <TableColumn fx:id="tcSearchedPlayerBPG" prefWidth="71.0" text="BPG" />
               </columns>
             </TableView>
          </center>
