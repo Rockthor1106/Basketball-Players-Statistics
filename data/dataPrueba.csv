@@ -1,51 +1,51 @@
-id,first_name,last_name,edad,puntos por partido,rebotes por partido
-1,Hedwig,McIsaac,18,42,41
-2,Adair,Leathe,41,6,62
-3,Urbanus,Clewarth,35,10,17
-4,Zsazsa,Nansom,44,27,24
-5,Elita,Hanmore,27,70,68
-6,Sada,Snaddin,19,94,66
-7,Tommie,Dawney,48,35,85
-8,Rinaldo,Geertje,20,77,44
-9,Geordie,Boldra,26,34,30
-10,Early,Knowlson,34,37,43
-11,Avrit,Bainbridge,37,27,63
-12,Eadmund,Gulliver,30,17,54
-13,Milissent,Bishopp,35,80,87
-14,Thor,Lacase,49,58,66
-15,Michel,Lardnar,29,65,42
-16,Trueman,Collip,18,56,14
-17,Cori,Craven,32,99,68
-18,Maurice,Wivell,44,71,43
-19,Rodney,Wessell,35,31,79
-20,Lind,Spaxman,44,12,42
-21,Felice,Scotchmur,34,57,81
-22,Gloriane,Sidlow,45,74,61
-23,Benni,Venny,24,20,31
-24,Kelcie,Vasovic,36,26,51
-25,Klarrisa,Churchward,19,46,48
-26,Rosabel,Simek,45,86,54
-27,Ola,Stott,28,12,26
-28,Eldin,Plumbley,43,100,39
-29,Nobie,Edon,21,99,73
-30,Bernadina,Cogle,25,60,75
-31,Hugibert,Skeldon,22,13,4
-32,Donall,Bavin,23,60,42
-33,Brewer,Loomes,32,53,75
-34,Garv,Mayo,42,59,78
-35,Daryl,Clawe,24,43,100
-36,Nara,Sybbe,35,31,54
-37,Meridith,Clemencet,31,33,37
-38,Diann,Masterson,23,25,55
-39,Maura,Pethick,35,61,85
-40,Red,Lias,43,28,13
-41,Millie,Zanuciolii,33,22,37
-42,Ilsa,Cantle,29,18,66
-43,Osmond,Colafate,34,21,68
-44,Heda,Cotter,35,85,10
-45,Berny,Cocks,43,7,38
-46,Hilliary,Du Hamel,36,88,73
-47,Cinderella,Cannell,35,3,38
-48,Hertha,Rossant,33,36,38
-49,Myron,Stelfax,35,61,68
-50,Jo-anne,Chanson,48,15,95
+id,firstname,lastname,age,team,points per game,rebounds per game,assists per game,robberies per game,blocks per game
+1,Daphne,Darrell,20,Lagartos saltantes,3,28,82,60,100
+2,Rosanne,Jethro,31,Diamondbacks,23,70,12,49,47
+3,Claudina,Abbot,32,El ritmo,14,70,99,36,15
+4,Luci,Primalia,22,Águilas de guerra,55,76,83,45,16
+5,Annaliese,Gavrila,25,Los osos luchadores,65,31,45,31,45
+6,Mahalia,Gherardo,25,Patrulla del dolor,5,93,68,9,35
+7,Lisette,Guildroy,30,Pioneros,8,78,25,1,25
+8,Annice,Arley,31,Rugientes,2,85,97,26,30
+9,Ninnetta,Mintz,35,Fusión,76,7,82,59,75
+10,Carol-Jean,Philoo,33,Boston Celtics,66,33,13,18,31
+11,Marcy,Nunci,22,Lagartos saltantes,3,6,55,80,90
+12,Clarice,Schenck,29,Patrulla del dolor,23,9,90,60,7
+13,Lizzie,Kesley,20,Lobas de la pradera,19,77,65,6,2
+14,Andeee,Autrey,19,Las jueces,83,8,57,73,88
+15,Annecorinne,Smitt,28,Tarzans,12,50,93,55,23
+16,Carmela,Sophronia,34,Ángeles,28,35,32,2,60
+17,Dode,Smitt,31,Mustangs,56,13,14,9,26
+18,Talya,Cavan,21,Guerreros del Norte,48,4,80,45,83
+19,Brena,Clie,33,Fenómenos,94,58,34,52,42
+20,Gretal,Bettine,29,Tigres azules,19,45,10,87,68
+21,Carmela,Vernier,33,Tormenta salvaje,16,64,0,27,84
+22,Maryellen,Stav,20,Los guepardos sucios,52,61,83,65,28
+23,Mildrid,Podvin,19,Matadores,95,29,93,27,91
+24,Marguerite,Ackerley,27,Cazadores de tormentas,55,12,13,69,38
+25,Theodora,Nunci,25,Diablos Rojos,45,89,77,43,38
+26,Lacie,Wandie,22,Destripadores netos,13,55,28,99,32
+27,Joy,Lauraine,30,Boston Celtics,35,90,21,19,83
+28,Gratia,Pyle,26,Charlotte Hornets,75,61,79,21,54
+29,Lily,Madelene,23,Lady Mustangs,1,27,21,48,40
+30,Blinni,Argus,30,Tormenta salvaje,29,20,52,13,78
+31,Doro,Vorster,26,Estrellas fugaces,97,3,89,87,97
+32,Joelly,Hepsibah,29,Los gatos monteses,85,68,96,67,38
+33,Chere,Riva,19,Diablos Rojos,8,70,45,81,50
+34,Gerianna,Borrell,27,Gorilas,25,64,98,65,81
+35,Kimberley,Ader,20,Asesinos de cereales,90,37,57,65,60
+36,Marika,MacIntosh,19,Tormenta Roja,58,48,89,79,24
+37,Kary,Melleta,23,Los Hammerheads,10,52,28,0,45
+38,Kore,Faso,33,El equipo del tío Drew,12,57,32,82,100
+39,Carmela,Odell,27,Crema,37,97,34,23,73
+40,Mariele,Dielu,24,Detroit Pistons,29,77,67,0,32
+41,Michaelina,Bollay,20,Los Rimshots,48,91,96,77,93
+42,Charissa,Tufts,23,Cobras negras,33,79,43,35,15
+43,Wilma,Donell,31,Fenómenos,95,77,68,42,70
+44,Alex,Raimondo,34,Capitanas,24,45,94,37,11
+45,Leanna,Pandolfi,25,Chicago Bulls,49,32,92,83,73
+46,Lucy,Noam,22,Estrellas fugaces,14,97,7,12,72
+47,Glenda,Mata,30,Philadelphia 76ers,5,80,33,54,57
+48,Lelah,Hilbert,25,Tijeras,50,90,13,17,23
+49,Brana,Penelopa,33,Cazadores de tormentas,6,20,16,20,8
+50,Emilia,Crudden,23,Soles nacientes,16,33,91,8,86

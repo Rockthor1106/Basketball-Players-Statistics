@@ -200,16 +200,24 @@ public class AVLTree <T extends Comparable<T>, K> implements IAVLTree<T, K>{
 			}
 		}
 		if(node != null) {
-			boolean equals = true;
-			players.add(node.getKey());
-			while(node.getRight() != null && equals) {
-				node = node.getRight();
-				if(value.equals(node.getData())) {
-					players.add(node.getKey());
-				}else equals = false;
-			}
+			players.addAll(getEquals(node, value));
 		}
 		return players;
+	}
+	public List<K> getEquals(AVLTreeNode<T, K> node, T value){
+		if(node == null) {
+			return null;
+		}
+		List<K> pK =  new ArrayList<>();
+		if(node.getLeft() != null) {
+			pK.addAll(getEquals(node.getLeft(), value));
+		}
+		if(node.getData().compareTo(value) == 0)
+			pK.add(node.getKey());
+		if(node.getRight() != null) {
+			pK.addAll(getEquals(node.getRight(), value));
+		}
+		return pK;
 	}
 	//Obtener jugadores con valor menor a T:value
 	@Override
